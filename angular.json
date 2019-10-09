@@ -24,9 +24,22 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/app/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
+              "src/app/fonts/Linearicons-Free-v1.0.0/icon-font.min.css",
+              "src/app/vendor/animate/animate.css",
+              "src/app/vendor/css-hamburgers/hamburgers.min.css",
+              "src/app/vendor/animsition/css/animsition.min.css",
+              "src/app/vendor/select2/select2.min.css",
+              "src/app/vendor/daterangepicker/daterangepicker.css",
+              "src/app/css/util.css",          
+              "src/app/css/main.css",
+              "src/styles.css",
+              "src/app/css/bootstrap.min.css",
+              "src/app/demo/demo.css"
             ],
-            "scripts": []
+            "scripts": [
+              
+            ]
           },
           "configurations": {
             "production": {
