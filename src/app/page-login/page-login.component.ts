@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -11,26 +10,17 @@ import { ApiService } from 'src/app/api.service';
 export class PageLoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  isLoadingResults = false;
-  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
-
+  usuario: any; 
+  constructor( private api: ApiService) { }
+  //constructor(){}
   ngOnInit() {
-     this.loginForm = this.formBuilder.group({
-    'email' : [null, Validators.required],
-    'senha' : [null, [Validators.required, Validators.minLength(4)]]
-  });
-  }
-  login(form: NgForm) {
-    this.isLoadingResults = true;
-    this.api.login(form)
-      .subscribe(res => {
-          const email = res['email'];
-          const senha = res['senha'];
-          this.isLoadingResults = false;
-        }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        });
+    this.usuario = {};
   }
 
+  login(fnm: FormGroup) {
+    this.api.login(this.usuario).subscribe(resposta =>{
+      console.log(resposta);
+    });
+     
+  }
 }

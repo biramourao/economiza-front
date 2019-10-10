@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "economiza-front": {
+    "economiza-api": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/economiza-front",
+            "outputPath": "dist/economiza-api",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.css",
               "src/app/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
               "src/app/fonts/Linearicons-Free-v1.0.0/icon-font.min.css",
               "src/app/vendor/animate/animate.css",
@@ -33,12 +34,20 @@
               "src/app/vendor/daterangepicker/daterangepicker.css",
               "src/app/css/util.css",          
               "src/app/css/main.css",
-              "src/styles.css",
               "src/app/css/bootstrap.min.css",
               "src/app/demo/demo.css"
             ],
             "scripts": [
-              
+                "src/app/vendor/jquery/jquery-3.2.1.min.js",
+                "src/app/vendor/animsition/js/animsition.min.js",
+                "src/app/vendor/bootstrap/js/popper.js",
+                "src/app/vendor/bootstrap/js/bootstrap.min.js",
+                "src/app/vendor/select2/select2.min.js",
+                "src/app/vendor/daterangepicker/moment.min.js",
+                "src/app/vendor/daterangepicker/daterangepicker.js",
+                "src/app/vendor/countdowntime/countdowntime.js",
+                "src/app/js/main.js"
+
             ]
           },
           "configurations": {
@@ -76,18 +85,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "economiza-front:build"
+            "browserTarget": "economiza-api:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "economiza-front:build:production"
+              "browserTarget": "economiza-api:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "economiza-front:build"
+            "browserTarget": "economiza-api:build"
           }
         },
         "test": {
@@ -124,15 +133,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "economiza-front:serve"
+            "devServerTarget": "economiza-api:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "economiza-front:serve:production"
+              "devServerTarget": "economiza-api:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "economiza-front"
+  "defaultProject": "economiza-api"
 }
