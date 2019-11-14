@@ -13,6 +13,8 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { routing } from './app-routing.module';
 import { AuthGuard } from './auth/auth.guard';
 import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
+import { MenuSuperiorComponent } from './shared/menu-superior/menu-superior.component';
+import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
     LoginComponent,
     GastosComponent,
     NotFoundComponent,
-    FormGastoComponent
+    FormGastoComponent,
+    MenuSuperiorComponent,
+    MenuLateralComponent
   ],
   imports: [
     BrowserModule,

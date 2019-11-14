@@ -10,13 +10,9 @@ import { AuthService } from './auth/auth-service.service';
 })
 export class AppComponent {
   title = 'economiza-api';
-  constructor(private tokenStorage: TokenStorageService, private router: Router, private authService: AuthService) {
+  somaGastos = 0;
+  constructor(private authService: AuthService,) {
 
-  }
-  logout() {
-    this.tokenStorage.signOut();
-    alert('Você saiu...')
-    this.router.navigate(['/login']);
   }
   isAuth() {
     return this.authService.isAuthenticated();

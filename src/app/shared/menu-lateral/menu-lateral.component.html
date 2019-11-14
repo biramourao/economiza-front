@@ -1,0 +1,65 @@
+<div class="col-md-auto bg-dark" id="menu-lateral">
+      <nav class=" sidebar text-light">
+        <ul class="nav flex-column">
+          <h3
+            class="sidebar-heading d-flex justify-content-between align-items-center mt-4 mb-1 text-muted border-bottom text-light">
+            <i class="material-icons text-light">
+              monetization_on
+            </i>
+            <span class="text-light">Economiza</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+            </a>
+            <hr>
+          </h3>
+          <li class="nav-item">
+            <a class="nav-link active text-light" [routerLink]="['/usuario']">
+              <i class="material-icons">
+                perm_identity
+              </i>
+              Usuário <span class="sr-only">(atual)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/fontes-de-renda']">
+              <i class="material-icons">
+                account_balance
+              </i>
+              Fontes de Renda
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/gastos']">
+              <i class="material-icons">
+                attach_money
+              </i>
+              Gastos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/categorias-de-gasto']">
+              <i class="material-icons">
+                view_list
+              </i>
+              Categ. de Gasto
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['/cartoes-de-credito']">
+              <i class="material-icons">
+                credit_card
+              </i>
+              Cartões de Crédito
+            </a>
+          </li>
+          <br>
+          <li class="nav-item">
+            <a class="nav-link text-light" (click)=logout() href="#">
+              <i class="material-icons">
+                exit_to_app
+              </i>
+              <b>SAIR</b>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      </div>
