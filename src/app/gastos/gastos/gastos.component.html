@@ -2,13 +2,13 @@
 <br>
 <button type="button" class="btn btn-primary" [routerLink]="['/gastos','cadastrar','']">Novo</button>
 <br>
-
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th>Descrição</th>
         <th>Valor</th>
+        <th>Categoria</th>
         <th>Vencimento</th>
         <th>Data Pag.</th>
         <th>Editar</th>
@@ -20,6 +20,9 @@
         <td>{{gasto.nome}}</td>
         <td>
           {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
+        </td>
+        <td>
+          {{gasto.categoriaGasto.descricao}}
         </td>
         <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
         <td *ngIf="gasto.dtPagamento">{{gasto.dtPagamento | date: 'dd-MM-yyyy'}} <br>
