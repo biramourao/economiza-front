@@ -3,6 +3,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Gasto } from 'src/app/model/gasto';
 import { ApiService } from 'src/app/api.service';
 import { CategoriaGasto } from 'src/app/model/categoria-gasto';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-form-gasto',
@@ -12,6 +13,7 @@ import { CategoriaGasto } from 'src/app/model/categoria-gasto';
 export class FormGastoComponent implements OnInit {
   titleForm: string;
   gasto = new Gasto();
+  dataVencimentoEdit: string;
   categoriasGasto = new Array<CategoriaGasto>();
   constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
     this.route.params.subscribe(
@@ -31,7 +33,7 @@ export class FormGastoComponent implements OnInit {
             break;
           }
           default: {
-            this.router.navigate(['/not-found']);
+            this.router.navigate(['/gastos']);
           }
         }
       }
@@ -46,11 +48,11 @@ export class FormGastoComponent implements OnInit {
 
   onSubmit() {
     switch (this.titleForm) {
-      case 'cadastrar': {
+      case 'Cadastrar': {
         this.cadastrarGasto();
         break;
       }
-      case 'editar': {
+      case 'Editar': {
         this.editarGasto();
         break;
       }
@@ -58,10 +60,11 @@ export class FormGastoComponent implements OnInit {
   }
 
   cadastrarGasto() {
+    this.gasto.cod = null;
     this.apiService.cadastrarGasto(this.gasto).subscribe(
       data => {
-        console.log('A categoria ' + data.nome + ' foi cadastrada com sucesso!');
-        const decisao = confirm('A categoria ' + data.nome + ' foi cadastrada com sucesso!\n Deseja realizar novo cadastro?');
+        console.log('O Gasto ' + data.nome + ' foi cadastrada com sucesso!');
+        const decisao = confirm('O Gasto ' + data.nome + ' foi cadastrada com sucesso!\n Deseja realizar novo cadastro?');
         if (!decisao) {
           this.router.navigate(['/gastos']);
         }
@@ -74,8 +77,8 @@ export class FormGastoComponent implements OnInit {
   editarGasto() {
     this.apiService.editarGasto(this.gasto).subscribe(
       data => {
-        console.log('A categoria ' + data.nome + ' foi editada com sucesso!');
-        const decisao = confirm('A categoria ' + data.nome + ' foi editada com sucesso!\n Deseja realizar novo cadastro?');
+        console.log('O Gasto ' + data.nome + ' foi editada com sucesso!');
+        const decisao = confirm('O Gasto ' + data.nome + ' foi editada com sucesso!\n Deseja realizar novo cadastro?');
         if (!decisao) {
           this.router.navigate(['/gastos']);
         }
@@ -89,6 +92,10 @@ export class FormGastoComponent implements OnInit {
     this.apiService.getGasto(cod).subscribe(
       data => {
         this.gasto = data;
+        this.gasto.vencimento = formatDate(data.vencimento, 'yyyy-MM-dd', 'en-US', '-03:00');
+        if (this.gasto.dtPagamento) {
+          this.gasto.dtPagamento = formatDate(data.dtPagamento, 'yyyy-MM-dd', 'en-US', '-03:00');
+        }
       },
       error => {
         console.log(error);
@@ -107,6 +114,17 @@ export class FormGastoComponent implements OnInit {
       }
     )
 
+  }
+  pagamento(cod: any, operacao: string) {
+    this.apiService.pagarGasto(cod).subscribe(
+      data => {
+        console.log('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
+        alert('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }
