@@ -5,9 +5,9 @@ export class Gasto {
 	cod: number;
 	nome: string;
 	valor: number;
-	vencimento: Date;
+	vencimento: any;
 	qtdParcelas: number;
-	dtPagamento: Date;
-	categoriaGasto: CategoriaGasto;
+	dtPagamento: any;
+	categoriaGasto = new CategoriaGasto();
 	cartaoDeCredito: CartaoDeCredito;
 }
