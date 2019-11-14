@@ -22,7 +22,17 @@
           {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
         </td>
         <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
-        <td>{{gasto.dtPagamento | date: 'dd-MM-yyyy'}}</td>
+        <td *ngIf="gasto.dtPagamento">{{gasto.dtPagamento | date: 'dd-MM-yyyy'}} <br>
+          <button type="button" class="btn" (click)="pagamento(gasto.cod,'estornado')">
+            <i class="material-icons">
+              undo
+            </i> Estornar</button></td>
+
+        <td *ngIf="!gasto.dtPagamento"><button type="button" class="btn" (click)="pagamento(gasto.cod,'pago')">
+            <i class="material-icons">
+              payment
+            </i> Pagar</button>
+        </td>
         <td>
           <button type="button" class="btn" [routerLink]="['/gastos','editar', gasto.cod]">
             <i class="material-icons">

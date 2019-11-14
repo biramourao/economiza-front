@@ -12,6 +12,7 @@ import { FormGastoComponent } from '../form-gasto/form-gasto.component';
 export class GastosComponent implements OnInit {
 
   gastos = new Array<Gasto>();
+  public totalGastos = 0;
 
   constructor(private apiService: ApiService, private router: Router, private formGasto: FormGastoComponent) { }
 
@@ -43,5 +44,17 @@ export class GastosComponent implements OnInit {
         }
       )
     }
+  }
+  pagamento(cod: any, operacao: string) {
+    this.apiService.pagarGasto(cod).subscribe(
+      data => {
+        console.log('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
+        alert('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
+        window.location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
