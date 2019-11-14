@@ -1,0 +1,42 @@
+<h2>Lista de Gastos</h2>
+<br>
+<button type="button" class="btn btn-primary" [routerLink]="['/gastos','cadastrar','']">Novo</button>
+<br>
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Vencimento</th>
+        <th>Data Pag.</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let gasto of gastos'>
+        <td>{{gasto.nome}}</td>
+        <td>
+          {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
+        </td>
+        <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
+        <td>{{gasto.dtPagamento | date: 'dd-MM-yyyy'}}</td>
+        <td>
+          <button type="button" class="btn" [routerLink]="['/gastos','editar', gasto.cod]">
+            <i class="material-icons">
+              edit
+            </i>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn" (click)="excluir(gasto)">
+            <i class="material-icons">
+              delete
+            </i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
