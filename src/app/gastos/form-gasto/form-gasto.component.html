@@ -1,0 +1,31 @@
+<form method="POST">
+    <h1>{{titleForm}}</h1>
+    <div class="form-group">
+        <label for="descricao">Descrição: </label>
+        <input type="text" class="form-control" id="descricao" value="{{gasto.nome}}" placeholder="Descrição"
+            [(ngModel)]="gasto.nome" [ngModelOptions]="{standalone: true}" required autofocus>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Valor: </label>
+        <input type="number" class="form-control" id="descricao" aria-label="Quantia" value="{{gasto.valor}}"
+            [(ngModel)]="gasto.valor" [ngModelOptions]="{standalone: true}" required>
+    </div>
+    <div class="form-group">
+        <label for="vencimento">Vencimento: </label>
+        <input type="date" class="form-control" id="vencimento" value="{{gasto.vencimento}}" placeholder="Vencimento"
+            [(ngModel)]="gasto.vencimento" [ngModelOptions]="{standalone: true}" required>
+    </div>
+    <div class="form-group">
+        <label for="vencimento">Data de pagamento: </label>
+        <input type="date" class="form-control" id="pagamento" value="{{gasto.dtPagamento}}" placeholder="Pagamento"
+            [(ngModel)]="gasto.dtPagamento" [ngModelOptions]="{standalone: true}" required>
+    </div>
+    <div class="form-group">
+        <label for="categoriaGasto">Categoria de Gasto</label>
+        <select class="form-control" id="categoriaGasto" value ="{{gasto.categoriaGasto.cod}}">
+            <option *ngFor="let categoriaGasto of categoriasGasto" value="{{categoriaGasto.cod}}">
+                {{categoriaGasto.descricao}}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
