@@ -1,4 +1,3 @@
-.height-full{
-	height: 100%;
-	position: relative;
+.row{
+    min-height: 768px;
 }
