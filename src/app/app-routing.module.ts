@@ -11,14 +11,13 @@ const appRoutes: Routes = [
     component: GastosComponent,
     canActivate: [AuthGuard]
   },
-  { path: '', pathMatch: 'full', component: GastosComponent,
-    canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/gastos', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'gastos/:tipo/:codGasto',
     component: FormGastoComponent,
     canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/not-found' }
+  { path: '**', redirectTo: '/not-found'}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
