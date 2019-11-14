@@ -26,9 +26,7 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
-      console.log("Pegou o token");
-      console.log(this.tokenStorage.getToken());
-      this.router.navigate(['/gastos']);
+      this.router.navigate(['gastos']);
     }
   }
 
