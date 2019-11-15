@@ -1,9 +1,28 @@
 <h2>Lista de Gastos</h2>
-<br>
-<button type="button" class="btn btn-primary" [routerLink]="['/gastos','cadastrar','']">Novo</button>
-<br>
+<div class="row">
+  <div class="col">
+    <br>
+    <button type="button" class="btn btn-primary" [routerLink]="['/gastos','cadastrar','']">Novo</button>
+    <br>
+  </div>
+  <div class="col">
+    <span>Filtro por período</span>
+    <br>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Inicio e Fim</span>
+      </div>
+      <input type="date" aria-label="inicio" class="form-control" name="inicio" id="inicio" value="{{inicio}}"
+        [(ngModel)]="inicio" [ngModelOptions]="{standalone: true}">
+      <input type="date" aria-label="fim" class="form-control" name="fim" id="fim" value="{{fim}}" [(ngModel)]="fim"
+        [ngModelOptions]="{standalone: true}">
+      <button type="button" class="btn btn-primary" (click)="this.listGastos(this.inicio,this.fim)">Filtrar</button>
+    </div>
+  </div>
+
+</div>
 <div class="table-responsive">
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" id="tbl">
     <thead>
       <tr>
         <th>Descrição</th>
@@ -16,40 +35,42 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let gasto of gastos'>
-        <td>{{gasto.nome}}</td>
-        <td>
-          {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
-        </td>
-        <td>
-          {{gasto.categoriaGasto.descricao}}
-        </td>
-        <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
-        <td *ngIf="gasto.dtPagamento">{{gasto.dtPagamento | date: 'dd-MM-yyyy'}} <br>
-          <button type="button" class="btn" (click)="pagamento(gasto.cod,'estornado')">
-            <i class="material-icons">
-              undo
-            </i> Estornar</button></td>
+      <ng-container *ngFor="let gasto of gastos">
+        <tr>
+          <td>{{gasto.nome}}</td>
+          <td>
+            {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
+          </td>
+          <td>
+            {{gasto.categoriaGasto.descricao}}
+          </td>
+          <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
+          <td *ngIf="gasto.dtPagamento">{{gasto.dtPagamento | date: 'dd-MM-yyyy'}} <br>
+            <button type="button" class="btn" (click)="pagamento(gasto.cod,'estornado')">
+              <i class="material-icons">
+                undo
+              </i> Estornar</button></td>
 
-        <td *ngIf="!gasto.dtPagamento"><button type="button" class="btn" (click)="pagamento(gasto.cod,'pago')">
-            <i class="material-icons">
-              payment
-            </i> Pagar</button>
-        </td>
-        <td>
-          <button type="button" class="btn" [routerLink]="['/gastos','editar', gasto.cod]">
-            <i class="material-icons">
-              edit
-            </i>
-          </button>
-        </td>
-        <td>
-          <button type="button" class="btn" (click)="excluir(gasto)">
-            <i class="material-icons">
-              delete
-            </i>
-          </button>
-        </td>
-      </tr>
+          <td *ngIf="!gasto.dtPagamento"><button type="button" class="btn" (click)="pagamento(gasto.cod,'pago')">
+              <i class="material-icons">
+                payment
+              </i> Pagar</button>
+          </td>
+          <td>
+            <button type="button" class="btn" [routerLink]="['/gastos','editar', gasto.cod]">
+              <i class="material-icons">
+                edit
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn" (click)="excluir(gasto)">
+              <i class="material-icons">
+                delete
+              </i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>

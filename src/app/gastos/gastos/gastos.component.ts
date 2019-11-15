@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Gasto } from 'src/app/model/gasto';
 import { Router } from '@angular/router';
-import { FormGastoComponent } from '../form-gasto/form-gasto.component';
+import { formatDate } from '@angular/common';
+import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
 
 @Component({
   selector: 'app-gastos',
@@ -12,19 +13,23 @@ import { FormGastoComponent } from '../form-gasto/form-gasto.component';
 export class GastosComponent implements OnInit {
 
   gastos = new Array<Gasto>();
-  public totalGastos = 0;
+  inicio = this.primeiroDiaMes();
+  fim = this.ultimoDiaMes();
 
-  constructor(private apiService: ApiService, private router: Router, private formGasto: FormGastoComponent) { }
+  constructor(private apiService: ApiService, private router: Router, private globalConstants: GlobalConstantsService) {
+       this.listGastos(this.primeiroDiaMes(), this.ultimoDiaMes());
+   }
 
   ngOnInit() {
-    this.listGastos();
+ 
   }
 
-  listGastos() {
-    this.apiService.listGasto().subscribe(
+  listGastos(dtInicio: string, dtFim: string) {
+    this.apiService.listGasto(dtInicio, dtFim).subscribe(
       data => {
         this.gastos = data as unknown as Gasto[];
         console.log(data);
+        this.somaGastos();
       },
       error => {
         console.log(error);
@@ -56,5 +61,24 @@ export class GastosComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  ultimoDiaMes() {
+    const date = new Date();
+    const ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    console.log(ultimoDia);
+    return formatDate(ultimoDia, 'yyyy-MM-dd', 'en-US', '-03:00');
+  }
+  primeiroDiaMes() {
+    const date = new Date();
+    const primeiroDia = new Date(date.getFullYear(), date.getMonth(), 1);
+    console.log(primeiroDia);
+    return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US', '-03:00');
+  }
+  somaGastos() {
+    let totalGastos = 0;
+    for (const iterator of this.gastos) {
+      totalGastos += iterator.valor;
+    }
+    this.globalConstants.totalGastos = totalGastos;
   }
 }

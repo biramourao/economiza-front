@@ -115,16 +115,6 @@ export class FormGastoComponent implements OnInit {
     )
 
   }
-  pagamento(cod: any, operacao: string) {
-    this.apiService.pagarGasto(cod).subscribe(
-      data => {
-        console.log('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
-        alert('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+  
 
 }

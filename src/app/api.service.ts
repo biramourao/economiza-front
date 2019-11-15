@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthLoginInfo } from './auth/auth-login-info';
 import { SignUpInfo } from './auth/sign-up-info';
 import { CategoriaGasto } from './model/categoria-gasto';
@@ -35,9 +35,10 @@ export class ApiService {
     const url = `${this.apiURL}/categorias-de-gasto/${cod}`;
     return this.http.delete<any>(url);
   }
-  listGasto() {
+  listGasto(dtInicio: string, dtFim: string) {
+    const params = new HttpParams().set('dtInicio', dtInicio).set('dtFim', dtFim);
     const url = `${this.apiURL}/gastos`;
-    return this.http.get<CategoriaGasto>(url, { responseType: 'json' });
+    return this.http.get<CategoriaGasto>(url, { responseType: 'json', params });
   }
   cadastrarGasto(gasto: Gasto) {
     const url = `${this.apiURL}/gastos`;
