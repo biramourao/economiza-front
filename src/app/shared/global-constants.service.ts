@@ -7,7 +7,7 @@ import { Gasto } from '../model/gasto';
 })
 export class GlobalConstantsService {
   totalGastos = 0;
-  totalRenda = 0;
+  totalRenda = 5000;
   sobra = 0;
   gastos = new Array<Gasto>();
 
@@ -16,6 +16,7 @@ export class GlobalConstantsService {
 
   public setTotalGastos(gastos: number) {
     this.totalGastos = gastos;
+    this.setSobra();
   }
 
   public getTotalGastos(): number {
@@ -24,17 +25,18 @@ export class GlobalConstantsService {
 
   public setTotalRendas(rendas: number) {
     this.totalGastos = rendas;
+    this.setSobra();
   }
 
   public getTotalRendas(): number {
     return this.totalRenda;
   }
   public setSobra(sobra: number) {
-    this.sobra = sobra;
+    this.sobra = this.totalRenda - this.totalGastos;
   }
 
   public getSobra(): number {
-    return this.sobra;
+    return this.totalRenda - this.totalGastos;
   }
   public setGastos(gastos: Gasto[]) {
     this.gastos = gastos;
