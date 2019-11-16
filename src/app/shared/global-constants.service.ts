@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core'
+import { Gasto } from '../model/gasto';
 
 
 @Injectable({
@@ -8,6 +9,7 @@ export class GlobalConstantsService {
   totalGastos = 0;
   totalRenda = 0;
   sobra = 0;
+  gastos = new Array<Gasto>();
 
   constructor() {
   }
@@ -33,6 +35,12 @@ export class GlobalConstantsService {
 
   public getSobra(): number {
     return this.sobra;
+  }
+  public setGastos(gastos: Gasto[]) {
+    this.gastos = gastos;
+  }
+  public getGastos() {
+    return this.gastos;
   }
 
 }
