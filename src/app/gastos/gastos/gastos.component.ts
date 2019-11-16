@@ -33,8 +33,8 @@ export class GastosComponent implements OnInit {
     this.apiService.listGasto(dtInicio, dtFim).subscribe(
       data => {
         this.gastos = data as unknown as Gasto[];
-        this.globalConstants.totalGastos = this.somaGastos(this.gastos);
-        this.globalConstants.gastos = data as unknown as Gasto[];;
+        this.globalConstants.setTotalGastos(this.somaGastos(this.gastos));
+        this.globalConstants.gastos = data as unknown as Gasto[];
       },
       error => {
         console.log(error);

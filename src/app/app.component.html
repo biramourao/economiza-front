@@ -3,10 +3,12 @@
   <!--Menu Lateral-->
   <div class="row">
     <div *ngIf="isAuth()">
+      <div class="col-md-20 bg-dark" id="menu-lateral">
       <app-menu-lateral></app-menu-lateral>
+      </div>
     </div>
     <!--Menu Superior-->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 ">
+    <main role="main" class="col-md-9 col-sm-auto col-lg-10 " id="main">
       <div *ngIf="isAuth()">
         <app-menu-superior></app-menu-superior>
       </div>
