@@ -15,7 +15,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
 import { MenuSuperiorComponent } from './shared/menu-superior/menu-superior.component';
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
-
+import { ChartsModule } from 'ng2-charts';
+import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
+import * as _ from 'underscore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +26,16 @@ import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.compone
     NotFoundComponent,
     FormGastoComponent,
     MenuSuperiorComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    GraficosGastosComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [ApiService,
     AuthGuard,

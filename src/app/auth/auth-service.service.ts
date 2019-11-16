@@ -30,7 +30,6 @@ export class AuthService {
     return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
   public isAuthenticated() {
-    console.log(this.tokenStorageService.getUsername());
     if (this.tokenStorageService.getUsername()) {
       return true;
     } else {

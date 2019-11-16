@@ -16,7 +16,8 @@
         [(ngModel)]="inicio" [ngModelOptions]="{standalone: true}">
       <input type="date" aria-label="fim" class="form-control" name="fim" id="fim" value="{{fim}}" [(ngModel)]="fim"
         [ngModelOptions]="{standalone: true}">
-      <button type="button" class="btn btn-primary" (click)="this.listGastos(this.inicio,this.fim)">Filtrar</button>
+      <button type="button" class="btn btn-primary" (click)="atualizaGastos(this.inicio,this.fim)">Filtrar</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/relatorio']" [queryParams]="{inicio: this.inicio, fim: this.fim}" >Gerar Graficos</button>
     </div>
   </div>
 
