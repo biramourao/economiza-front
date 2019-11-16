@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { GastosComponent } from './gastos/gastos/gastos.component';
 import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
+import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
 
 const appRoutes: Routes = [
   { path: 'gastos',
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   },
   { path: '', redirectTo: '/gastos', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
+  { path: 'relatorio', component: GraficosGastosComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'gastos/:tipo/:codGasto',
     component: FormGastoComponent,
