@@ -1,11 +1,55 @@
-<div>
-	<div style="display: block">
-		<canvas baseChart 
-			[datasets]="this.barChartData" 
-			[labels]="this.barChartLabels" 
-			[options]="this.barChartOptions"
-			[legend]="this.barChartLegend" 
-			[chartType]="this.barChartType">
-		</canvas>
+<div class="container-fluid justify-content-center">
+	<div class="row justify-content-center">
+		<h1>Relatório de Gastos</h1>
+		<div class="input-group">
+      		<div class="input-group-prepend">
+        		<span class="input-group-text">Período: Inicio | Fim</span>
+      		</div>
+      		<input type="date" aria-label="inicio" class="form-control" name="inicio" id="inicio" value="{{inicio}}"
+        		[(ngModel)]="inicio" [ngModelOptions]="{standalone: true}">
+     		<input type="date" aria-label="fim" class="form-control" name="fim" id="fim" value="{{fim}}" [(ngModel)]="fim"
+        		[ngModelOptions]="{standalone: true}">
+      		<button type="button" class="btn btn-dark form-control" (click)="atualizaGastos(this.inicio,this.fim)">Atualizar</button>
+    	</div>
+	</div>
+	<div class="row justify-content-between">
+		<div class="col-6 p-4">
+			<h3 style="text-align: center">Por Categoria</h3>
+			<canvas baseChart 
+				[datasets]="this.barChartData" 
+				[labels]="this.barChartLabels"
+				[options]="this.barChartOptions" 
+				[legend]="this.barChartLegend" 
+				[chartType]="this.barChartType">
+			</canvas>
+
+		</div>
+		<div class="col-6 p-4">
+			<h3 style="text-align: center">Pagos vs Não Pagos</h3>
+			<canvas baseChart 
+				[datasets]="this.doughnutChartData" 
+				[labels]="this.doughnutChartLabels"
+				[options]="this.doughnutChartOptions" 
+				[legend]="this.doughnutChartLegend" 
+				[chartType]="this.doughnutChartType">
+			</canvas>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-6 p-4">
+			<h2>Qtd de gastos cadastradas</h2>
+			<h1>{{gastos.length}}</h1>
+		</div>
+		<div class="col-6 p-4" *ngIf="globalConstants.getSobra()<0">
+			<h3>Gasto total (R$): {{globalConstants.totalGastos}}</h3>
+			<h3>Renda total (R$): {{globalConstants.totalRenda}}</h3>
+			<h3 class="bg-danger text-light">Diferença (R$): {{globalConstants.getSobra()}}</h3>
+		</div>
+		<div class="col-6 p-4" *ngIf="globalConstants.getSobra()>0">
+			<h3>Gasto total (R$): {{globalConstants.totalGastos}}</h3>
+			<h3>Renda total (R$): {{globalConstants.totalRenda}}</h3>
+			<h3 class="bg-success text-light">Diferença (R$): {{globalConstants.getSobra()}}</h3>
+		</div>
 	</div>
 </div>
