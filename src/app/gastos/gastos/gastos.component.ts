@@ -35,6 +35,7 @@ export class GastosComponent implements OnInit {
         this.gastos = data as unknown as Gasto[];
         this.globalConstants.setTotalGastos(this.somaGastos(this.gastos));
         this.globalConstants.gastos = data as unknown as Gasto[];
+        this.globalConstants.atualizaFontesDeRenda(dtInicio, dtFim);
       },
       error => {
         console.log(error);

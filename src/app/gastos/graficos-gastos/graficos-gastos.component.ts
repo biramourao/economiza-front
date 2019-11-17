@@ -67,6 +67,7 @@ export class GraficosGastosComponent implements OnInit {
         this.groupByCategoria();
         this.globalConstants.setTotalGastos(this.somaGastos(this.gastos));
         this.globalConstants.gastos = data as unknown as Gasto[];
+        this.globalConstants.atualizaFontesDeRenda(dtInicio, dtFim);
         this.groupByPagamento();
       },
       error => {
