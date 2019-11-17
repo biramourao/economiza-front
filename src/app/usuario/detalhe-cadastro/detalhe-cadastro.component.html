@@ -1,0 +1,65 @@
+<h2>Detalhes do Usuario</h2>
+<form method="POST">
+        <!--campo de nome-->
+        <div class="form-group">
+          <label for="nome">Nome: </label>
+          <input type="text" class="form-control" id="nome" placeholder="Escreva seu nome"
+            [(ngModel)]="this.usuario.nome" [ngModelOptions]="{standalone: true}">
+        </div>
+        <!--campo de email-->
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" class="form-control" id="email" placeholder="Escreva seu email"
+          [(ngModel)]="this.usuario.email" [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="editarUsuario()">Editar</button>
+      <button type="submit" class="btn btn-danger" (click)="deleteUsuario()">Excluir</button>
+    </form>
+<!--<div class="row">
+  <div class="col">
+    <br>
+    <button type="button" class="btn btn-primary" [routerLink]="['/gastos','cadastrar','']">Novo</button>
+    <br>
+  </div>
+  <div class="col">
+    <span>Editar</span>
+    <br>
+<div class="table-responsive">
+  <table class="table table-striped table-sm" id="tbl">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let gasto of gastos">
+        <tr>
+          <td>{{editar.nome}}</td>
+          <td>
+            {{editar.email}}
+          </td>
+          <td>
+            {{gasto.categoriaGasto.descricao}}
+          </td>
+           
+          <td>
+            <button type="button" class="btn" [routerLink]="">
+              <i class="material-icons">
+                editar
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn" (click)="excluir">
+              <i class="material-icons">
+                excluir
+              </i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+-->
