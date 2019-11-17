@@ -42,14 +42,14 @@
 			<h1>{{gastos.length}}</h1>
 		</div>
 		<div class="col-6 p-4" *ngIf="globalConstants.getSobra()<0">
-			<h3>Gasto total (R$): {{globalConstants.totalGastos}}</h3>
-			<h3>Renda total (R$): {{globalConstants.totalRenda}}</h3>
-			<h3 class="bg-danger text-light">Diferença (R$): {{globalConstants.getSobra()}}</h3>
+			<h3>Gasto total: {{globalConstants.totalGastos | currency:'BRL':'symbol':'1.2-2'}}</h3>
+			<h3>Renda total: {{globalConstants.totalRenda | currency:'BRL':'symbol':'1.2-2'}}</h3>
+			<h3 class="bg-danger text-light">Diferença: {{globalConstants.getSobra() | currency:'BRL':'symbol':'1.2-2'}}</h3>
 		</div>
 		<div class="col-6 p-4" *ngIf="globalConstants.getSobra()>0">
-			<h3>Gasto total (R$): {{globalConstants.totalGastos}}</h3>
-			<h3>Renda total (R$): {{globalConstants.totalRenda}}</h3>
-			<h3 class="bg-success text-light">Diferença (R$): {{globalConstants.getSobra()}}</h3>
+			<h3>Gasto total: {{globalConstants.totalGastos | currency:'BRL':'symbol':'1.2-2'}}</h3>
+			<h3>Renda total: {{globalConstants.totalRenda | currency:'BRL':'symbol':'1.2-2'}}</h3>
+			<h3 class="bg-success text-light">Diferença: {{globalConstants.getSobra() | currency:'BRL':'symbol':'1.2-2'}}</h3>
 		</div>
 	</div>
 </div>

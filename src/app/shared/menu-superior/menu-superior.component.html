@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button type="button" class="btn btn-primary">Total de Gastos: R$ {{this.globalConstants.totalGastos}}</button>
-            <button type="button" class="btn btn-success">Total de Renda: R$ {{this.globalConstants.totalRenda}}</button>
-            <button type="button" class="btn btn-info">Sobra: R$ {{this.globalConstants.sobra}}</button>
+            <button type="button" class="btn btn-primary">Total de Gastos: {{this.globalConstants.totalGastos | currency:'BRL':'symbol':'1.2-2'}}</button>
+            <button type="button" class="btn btn-success">Total de Renda: {{this.globalConstants.totalRenda | currency:'BRL':'symbol':'1.2-2'}}</button>
+            <button type="button" class="btn btn-info">Sobra: {{this.globalConstants.sobra | currency:'BRL':'symbol':'1.2-2'}}</button>
         </div>
     </div>
 </div>
