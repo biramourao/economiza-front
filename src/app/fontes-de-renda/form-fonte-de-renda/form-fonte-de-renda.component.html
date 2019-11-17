@@ -1,4 +1,4 @@
-<h2>Cadastro de fonte de renda</h2>
+<h2>{{this.titleForm}}</h2>
 <form method="POST">
   <!--campo de descrição-->
   <div class="form-group">
@@ -20,10 +20,7 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <button type="submit" class="btn btn-primary" (click)="cadastrarFonteDeRenda()">Cadastrar</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar</button>
     </div>
   </div>
-  {{this.fonteDeRenda.descricao}}
-{{this.fonteDeRenda.valor}}
-{{this.fonteDeRenda.dtValidade}}
 </form>

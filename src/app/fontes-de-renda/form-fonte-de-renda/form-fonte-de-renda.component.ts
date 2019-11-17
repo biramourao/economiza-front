@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { FonteDeRenda } from 'src/app/model/fonte-de-renda';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-form-fonte-de-renda',
@@ -86,6 +87,7 @@ export class FormFonteDeRendaComponent implements OnInit {
     this.apiService.getFonteDeRenda(cod).subscribe(
       data => {
         this.fonteDeRenda = data;
+        this.fonteDeRenda.dtValidade = formatDate(data.dtValidade, 'yyyy-MM-dd', 'en-US', '-03:00')
       },
       error => {
         console.log(error);
