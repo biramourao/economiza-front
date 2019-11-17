@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Gasto } from 'src/app/model/gasto';
-import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-gastos',
@@ -12,24 +12,29 @@ import { GlobalConstantsService } from 'src/app/shared/global-constants.service'
 })
 export class GastosComponent implements OnInit {
 
-  gastos = new Array<Gasto>();
+
   inicio = this.primeiroDiaMes();
   fim = this.ultimoDiaMes();
+  gastos = new Array<Gasto>();
 
-  constructor(private apiService: ApiService, private router: Router, private globalConstants: GlobalConstantsService) {
-       this.listGastos(this.primeiroDiaMes(), this.ultimoDiaMes());
-   }
+  constructor(private apiService: ApiService, private globalConstants: GlobalConstantsService) {
 
-  ngOnInit() {
- 
+    this.inicio = this.primeiroDiaMes();
+    this.fim = this.ultimoDiaMes();
+    this.atualizaGastos(this.primeiroDiaMes(), this.ultimoDiaMes());
   }
 
-  listGastos(dtInicio: string, dtFim: string) {
+  ngOnInit() {
+
+    this.atualizaGastos(this.inicio, this.fim);
+  }
+
+  atualizaGastos(dtInicio: string, dtFim: string) {
     this.apiService.listGasto(dtInicio, dtFim).subscribe(
       data => {
         this.gastos = data as unknown as Gasto[];
-        console.log(data);
-        this.somaGastos();
+        this.globalConstants.setTotalGastos(this.somaGastos(this.gastos));
+        this.globalConstants.gastos = data as unknown as Gasto[];
       },
       error => {
         console.log(error);
@@ -37,6 +42,7 @@ export class GastosComponent implements OnInit {
       }
     );
   }
+
   excluir(gasto: Gasto) {
     const resposta = confirm('Deseja realmente excluir o gasto \'' + gasto.nome + '\'');
     if (resposta) {
@@ -50,10 +56,10 @@ export class GastosComponent implements OnInit {
       )
     }
   }
+
   pagamento(cod: any, operacao: string) {
     this.apiService.pagarGasto(cod).subscribe(
       data => {
-        console.log('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
         alert('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
         window.location.reload();
       },
@@ -62,23 +68,26 @@ export class GastosComponent implements OnInit {
       }
     );
   }
-  ultimoDiaMes() {
+
+  ultimoDiaMes(): string {
     const date = new Date();
     const ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    console.log(ultimoDia);
     return formatDate(ultimoDia, 'yyyy-MM-dd', 'en-US', '-03:00');
   }
-  primeiroDiaMes() {
+
+  primeiroDiaMes(): string {
     const date = new Date();
     const primeiroDia = new Date(date.getFullYear(), date.getMonth(), 1);
-    console.log(primeiroDia);
     return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US', '-03:00');
   }
-  somaGastos() {
+
+  somaGastos(gastos: Array<Gasto>): number {
     let totalGastos = 0;
-    for (const iterator of this.gastos) {
+    for (const iterator of gastos) {
       totalGastos += iterator.valor;
     }
-    this.globalConstants.totalGastos = totalGastos;
+    return totalGastos;
   }
+
+
 }

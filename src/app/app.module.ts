@@ -17,6 +17,11 @@ import { MenuSuperiorComponent } from './shared/menu-superior/menu-superior.comp
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
 import { CadastroUsuarioComponent } from './usuario/cadastro-usuario/cadastro-usuario.component';
 import { DetalheCadastroComponent } from './usuario/detalhe-cadastro/detalhe-cadastro.component';
+import { ChartsModule } from 'ng2-charts';
+import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
+import * as _ from 'underscore';
+import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
+import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +33,18 @@ import { DetalheCadastroComponent } from './usuario/detalhe-cadastro/detalhe-cad
     MenuSuperiorComponent,
     MenuLateralComponent,
     CadastroUsuarioComponent,
-    DetalheCadastroComponent
+    DetalheCadastroComponent,
+    GraficosGastosComponent,
+    CategoriasDeGastoComponent,
+    FormCategoriaDeGastoComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [ApiService,
     AuthGuard,
