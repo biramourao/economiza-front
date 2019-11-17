@@ -10,25 +10,40 @@ import { DetalheCadastroComponent } from './usuario/detalhe-cadastro/detalhe-cad
 import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
 import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
 import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
+import { FontesDeRendaComponent } from './fontes-de-renda/fontes-de-renda/fontes-de-renda.component';
 
 
 const appRoutes: Routes = [
-  { path: 'gastos',
+  {
+    path: 'gastos',
     component: GastosComponent,
     canActivate: [AuthGuard]
   },
-  { path: '', redirectTo: '/gastos', pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: '', redirectTo: '/gastos', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'relatorio', component: GraficosGastosComponent, canActivate: [AuthGuard] },
-  { path: 'not-found', component: NotFoundComponent },
+  { path: 'not-found', component: NotFoundComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
-  { path: 'detalhes-usuario', component: DetalheCadastroComponent },
+  { path: 'detalhes-usuario', component: DetalheCadastroComponent, canActivate: [AuthGuard] },
   { path: 'categorias-de-gasto', component: CategoriasDeGastoComponent, canActivate: [AuthGuard] },
-  { path: 'categorias-de-gasto/:tipo/:codCategoriaGasto', component: FormCategoriaDeGastoComponent, canActivate: [AuthGuard] },
-  { path: 'gastos/:tipo/:codGasto',
+
+  {
+    path: 'categorias-de-gasto/:tipo/:codCategoriaGasto',
+    component: FormCategoriaDeGastoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'gastos/:tipo/:codGasto',
     component: FormGastoComponent,
-    canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/not-found'}
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'fontes-de-renda',
+    component: FontesDeRendaComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: '/not-found', canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/login' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

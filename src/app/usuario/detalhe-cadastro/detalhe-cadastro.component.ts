@@ -11,10 +11,12 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 })
 export class DetalheCadastroComponent implements OnInit {
   usuario: Usuario;
+  naoEditavel = true;
   constructor(private apiService: ApiService, private tokenStorageService: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
     this.getUsuario();
+    this.naoEditavel = true;
   }
   getUsuario() {
     this.apiService.getUsuario().subscribe(
@@ -30,29 +32,38 @@ export class DetalheCadastroComponent implements OnInit {
     this.apiService.editarUsuario(this.usuario).subscribe(
       data => {
         const decisao = confirm('O Usuario ' + data.nome + ' foi editada com sucesso!');
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-  deleteUsuario(){
-    const decisao = confirm('Você deseja excluir o seu usuário?\n Todos os seus dados serão excluidos permanentemente!');
-    if(decisao){
-    this.apiService.deleteUsuario(this.usuario.cod).subscribe(
-      data => {
         this.logout();
       },
       error => {
         console.log(error);
       }
     );
+  }
+  deleteUsuario() {
+    const decisao = confirm('Você deseja excluir o seu usuário?\n Todos os seus dados serão excluidos permanentemente!');
+    if (decisao) {
+      this.apiService.deleteUsuario(this.usuario.cod).subscribe(
+        data => {
+          alert("O usuário, e seus dados foram excluidos com sucesso!")
+          this.logout();
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
   logout() {
     this.tokenStorageService.signOut();
-    alert('Usuario Excluído com sucesso!')
+    alert('Você foi desconectado, faça login novamente para revalidar o dados!')
     this.router.navigate(['/login']);
+  }
+  habilitaEdicao() {
+    if (this.naoEditavel) {
+      this.naoEditavel = false;
+    }else{
+      this.naoEditavel = true;
+    }
   }
 
 }

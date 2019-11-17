@@ -86,7 +86,8 @@ export class ApiService {
   editarUsuario(usuario: Usuario){
     const url = `${this.apiURL}/usuarios/${usuario.cod}`;
     return this.http.put<Usuario>(url, usuario);
-    
+  }
+  
   //Metodos de Fonte de Renda
   listFontesDeRenda() {
     const url = `${this.apiURL}/fontes-de-renda`;
