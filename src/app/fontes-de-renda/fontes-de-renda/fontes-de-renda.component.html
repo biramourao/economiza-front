@@ -3,6 +3,18 @@
   <div class="col-md-auto">
     <button type="button" class="btn btn-primary" [routerLink]="['/fontes-de-renda','cadastrar','']">Novo</button>
   </div>
+  <div class="col-md-9">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Filtro por período: Inicio | Fim</span>
+      </div>
+      <input type="date" aria-label="inicio" class="form-control" name="inicio" id="inicio" value="{{inicio}}"
+        [(ngModel)]="inicio" [ngModelOptions]="{standalone: true}">
+      <input type="date" aria-label="fim" class="form-control" name="fim" id="fim" value="{{fim}}" [(ngModel)]="fim"
+        [ngModelOptions]="{standalone: true}">
+      <button type="button" class="btn btn-dark form-control" (click)="atualizaFontesDeRenda(this.inicio,this.fim)">Filtrar</button>
+    </div>
+  </div>
 </div>
 <div class="row p-3">
   <div class="table-responsive">
@@ -10,26 +22,38 @@
       <thead>
         <tr>
           <th>
-            Categoria de Gasto
+            Descrição
+		  </th>
+		  <th>
+            Valor
+		  </th>
+		  <th>
+            Validade
           </th>
           <th>Editar</th>
           <th>Excluir</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let categoriaGasto of categoriasGasto">
+        <tr *ngFor="let fonteDeRenda of fontesDeRenda">
           <td>
-            {{categoriaGasto.descricao}}
+            {{fonteDeRenda.descricao}}
+		  </td>
+		  <td>
+            {{fonteDeRenda.valor | currency:'BRL':'symbol':'1.2-2'}}
+		  </td>
+		  <td>
+            {{fonteDeRenda.dtValidade | date: 'dd-MM-yyyy'}}
           </td>
           <td>
-            <button type="button" class="btn" [routerLink]="['/categorias-de-gasto','editar', categoriaGasto.cod]">
+            <button type="button" class="btn" [routerLink]="['/fontes-de-renda','editar', fonteDeRenda.cod]">
               <i class="material-icons">
                 edit
               </i>
             </button>
           </td>
           <td>
-            <button type="button" class="btn" (click)="excluir(categoriaGasto)">
+            <button type="button" class="btn" (click)="excluir(fonteDeRenda)">
               <i class="material-icons">
                 delete
               </i>

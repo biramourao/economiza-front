@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FonteDeRenda } from 'src/app/model/fonte-de-renda';
+import { ApiService } from 'src/app/api.service';
+import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
+import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
 
 @Component({
   selector: 'app-fontes-de-renda',
@@ -6,22 +11,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fontes-de-renda.component.css']
 })
 export class FontesDeRendaComponent implements OnInit {
-  
-categoriasGasto: CategoriaGasto[];
+
+fontesDeRenda: FonteDeRenda[];
   key = ''; // Define um valor padrão, para quando inicializar o componente
   reverse = false;
+  inicio = '';
+  fim = '';
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router, private globalConstantsService : GlobalConstantsService) { }
 
   ngOnInit() {
-    this.categoriasGasto = new Array();
-    this.listCategoriaGasto();
+    this.inicio = this.primeiroDiaMes();
+    this.fim = this.ultimoDiaMes();
+    this.fontesDeRenda = new Array();
+    this.atualizaFontesDeRenda(this.primeiroDiaMes(), this.ultimoDiaMes());
   }
-  listCategoriaGasto() {
-    this.apiService.listCategoriaDeGasto().subscribe(
+  atualizaFontesDeRenda(dtInicio: string, dtFim: string) {
+    this.apiService.listFontesDeRenda(dtInicio, dtFim).subscribe(
       data => {
-        this.categoriasGasto = data as unknown as CategoriaGasto[];
-        console.log(this.categoriasGasto);
+        this.fontesDeRenda = data as unknown as FonteDeRenda[];
+        this.globalConstantsService.atualizaGastos(dtInicio, dtFim);
+        console.log(this.fontesDeRenda);
       },
       error => {
         console.log(error);
@@ -29,10 +39,10 @@ categoriasGasto: CategoriaGasto[];
     )
 
   }
-  excluir(categoriaGasto: CategoriaGasto) {
-    const resposta = confirm('Deseja realmente excluir a categoria \'' + categoriaGasto.descricao + '\'');
+  excluir(fonteDeRenda: FonteDeRenda) {
+    const resposta = confirm('Deseja realmente excluir a fonte de Renda \'' + fonteDeRenda.descricao + '\'');
     if (resposta) {
-      this.apiService.excluirCategoriaGasto(categoriaGasto.cod).subscribe(
+      this.apiService.excluirCategoriaGasto(fonteDeRenda.cod).subscribe(
         data => {
           window.location.reload();
         },
@@ -41,6 +51,17 @@ categoriasGasto: CategoriaGasto[];
         }
       )
     }
+  }
+  ultimoDiaMes(): string {
+    const date = new Date();
+    const ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return formatDate(ultimoDia, 'yyyy-MM-dd', 'en-US', '-03:00');
+  }
+
+  primeiroDiaMes(): string {
+    const date = new Date();
+    const primeiroDia = new Date(date.getFullYear(), date.getMonth(), 1);
+    return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US', '-03:00');
   }
 
 }

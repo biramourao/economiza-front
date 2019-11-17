@@ -15,6 +15,9 @@ export class FormGastoComponent implements OnInit {
   gasto = new Gasto();
   dataVencimentoEdit: string;
   categoriasGasto = new Array<CategoriaGasto>();
+  categoriaDeGasto = new CategoriaGasto();
+  mostrarCadastroCategoriaDeGasto = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {
     this.route.params.subscribe(
       res => {
@@ -60,10 +63,11 @@ export class FormGastoComponent implements OnInit {
   }
 
   cadastrarGasto() {
+
     this.gasto.cod = null;
 
-    if(gasto.categoriaGasto.cod = "null"){
-      gasto.categoriaGasto.cod = null;
+    if (this.gasto.categoriaGasto === null) {
+      this.gasto.categoriaGasto = null;
     }
 
     this.apiService.cadastrarGasto(this.gasto).subscribe(
@@ -80,9 +84,9 @@ export class FormGastoComponent implements OnInit {
     );
   }
   editarGasto() {
-    
-    if(gasto.categoriaGasto.cod = "null"){
-      gasto.categoriaGasto.cod = null;
+
+    if (this.gasto.categoriaGasto === null) {
+      this.gasto.categoriaGasto = null;
     }
 
     this.apiService.editarGasto(this.gasto).subscribe(
@@ -117,14 +121,31 @@ export class FormGastoComponent implements OnInit {
     this.apiService.listCategoriaDeGasto().subscribe(
       data => {
         this.categoriasGasto = data as unknown as CategoriaGasto[];
-        console.log(this.categoriasGasto);
       },
       error => {
         console.log(error);
       }
     )
-
   }
-  
+  cadastrarCategoriaGasto() {
+    this.categoriaDeGasto.cod = null;
+    this.apiService.cadastrarCategoriaGasto(this.categoriaDeGasto).subscribe(
+      data => {
+        alert('A Categoria ' + data.descricao + ' foi cadastrada com sucesso!');
+        this.listCategoriaGasto();
+        this.mostrarCadastroCategoria();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  mostrarCadastroCategoria() {
+    if (this.mostrarCadastroCategoriaDeGasto) {
+      this.mostrarCadastroCategoriaDeGasto = false;
+    } else {
+      this.mostrarCadastroCategoriaDeGasto = true;
+    }
+  }
 
 }

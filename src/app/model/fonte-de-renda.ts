@@ -4,6 +4,6 @@ export class FonteDeRenda {
     cod: number;
     descricao: string;
     valor: number;
-    dtInsercao: Date;
+    dtValidade: Date;
     usuario: Usuario;
 }
