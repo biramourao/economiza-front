@@ -15,6 +15,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
 import { MenuSuperiorComponent } from './shared/menu-superior/menu-superior.component';
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
+import { CadastroUsuarioComponent } from './usuario/cadastro-usuario/cadastro-usuario.component';
+import { DetalheCadastroComponent } from './usuario/detalhe-cadastro/detalhe-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.compone
     NotFoundComponent,
     FormGastoComponent,
     MenuSuperiorComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    CadastroUsuarioComponent,
+    DetalheCadastroComponent
   ],
   imports: [
     BrowserModule,
