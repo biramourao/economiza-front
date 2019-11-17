@@ -18,6 +18,8 @@ import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.compone
 import { ChartsModule } from 'ng2-charts';
 import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
 import * as _ from 'underscore';
+import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
+import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,9 @@ import * as _ from 'underscore';
     FormGastoComponent,
     MenuSuperiorComponent,
     MenuLateralComponent,
-    GraficosGastosComponent
+    GraficosGastosComponent,
+    CategoriasDeGastoComponent,
+    FormCategoriaDeGastoComponent
   ],
   imports: [
     BrowserModule,
