@@ -26,11 +26,12 @@ fontesDeRenda: FonteDeRenda[];
     this.fontesDeRenda = new Array();
     this.atualizaFontesDeRenda(this.primeiroDiaMes(), this.ultimoDiaMes());
   }
+
   atualizaFontesDeRenda(dtInicio: string, dtFim: string) {
     this.apiService.listFontesDeRenda(dtInicio, dtFim).subscribe(
       data => {
         this.fontesDeRenda = data as unknown as FonteDeRenda[];
-        this.globalConstantsService.atualizaGastos(dtInicio, dtFim);
+        this.globalConstantsService.atualizaFontesDeRenda(dtInicio, dtFim);
         console.log(this.fontesDeRenda);
       },
       error => {
@@ -42,7 +43,7 @@ fontesDeRenda: FonteDeRenda[];
   excluir(fonteDeRenda: FonteDeRenda) {
     const resposta = confirm('Deseja realmente excluir a fonte de Renda \'' + fonteDeRenda.descricao + '\'');
     if (resposta) {
-      this.apiService.excluirCategoriaGasto(fonteDeRenda.cod).subscribe(
+      this.apiService.excluirFonteDeRenda(fonteDeRenda.cod).subscribe(
         data => {
           window.location.reload();
         },
