@@ -7,27 +7,48 @@
     </div>
     <div class="form-group">
         <label for="descricao">Valor: </label>
-        <input type="number" class="form-control" id="descricao" value="{{gasto.valor}}"
-            [(ngModel)]="gasto.valor" [ngModelOptions]="{standalone: true}" required>
+        <input type="number" class="form-control" id="descricao" value="{{gasto.valor}}" [(ngModel)]="gasto.valor"
+            [ngModelOptions]="{standalone: true}" required>
     </div>
     <div class="form-group">
         <label for="vencimento">Vencimento:</label>
         <input type="date" class="form-control" id="vencimento" value="{{gasto.vencimento}}" placeholder="Vencimento"
-            [(ngModel)]="gasto.vencimento" [ngModelOptions]="{standalone: true}" >
+            [(ngModel)]="gasto.vencimento" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
         <label for="pagamento">Data de pagamento: </label>
         <input type="date" class="form-control" id="pagamento" value="{{gasto.dtPagamento}}" placeholder="Pagamento"
             [(ngModel)]="gasto.dtPagamento" [ngModelOptions]="{standalone: true}">
     </div>
+
     <div class="form-group">
         <label for="categoriaGasto">Categoria de Gasto</label>
-        <select class="form-control" id="categoriaGasto" value ="{{gasto.categoriaGasto.cod}}"  [(ngModel)]="gasto.categoriaGasto.cod" [ngModelOptions]="{standalone: true}" >
-            <option *ngFor="let categoriaGasto of categoriasGasto" value="{{categoriaGasto.cod}}">
-                {{categoriaGasto.descricao}}</option>
-            <option value= "null" selected="selected">
-            SEM CATEGORIA</option>
-        </select>
+        <div class="input-group">
+            <select class="form-control" id="categoriaGasto" value="{{gasto.categoriaGasto.cod}}"
+                [(ngModel)]="gasto.categoriaGasto.cod" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let categoriaGasto of categoriasGasto" value="{{categoriaGasto.cod}}">
+                    {{categoriaGasto.descricao}}</option>
+                <option value="0" selected="selected" *ngIf="titleForm =='Editar'">
+                    SEM CATEGORIA</option>
+            </select>
+            <button type="button" class="btn btn-success" (click)="this.mostrarCadastroCategoria()"> Cadastrar Nova
+                Categoria </button>
+        </div>
+    </div>
+    <div *ngIf="this.mostrarCadastroCategoriaDeGasto">
+        <form method="POST">
+            <h4>Cadastrar Categoria de Gasto</h4>
+            <div class="input-group">
+                <input type="text" class="form-control" id="descricao" value="{{categoriaDeGasto.descricao}}"
+                    placeholder="Descrição" [(ngModel)]="categoriaDeGasto.descricao"
+                    [ngModelOptions]="{standalone: true}" required autofocus>
+                <button type="button" class="btn btn-success" (click)="this.cadastrarCategoriaGasto()"> Cadastrar
+                    Categoria
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="this.mostrarCadastroCategoria()">
+                    Cancelar</button>
+            </div>
+        </form>
     </div>
     <button type="submit" class="btn btn-primary"> Enviar </button>
 </form>
