@@ -61,6 +61,11 @@ export class FormGastoComponent implements OnInit {
 
   cadastrarGasto() {
     this.gasto.cod = null;
+
+    if(gasto.categoriaGasto.cod = "null"){
+      gasto.categoriaGasto.cod = null;
+    }
+
     this.apiService.cadastrarGasto(this.gasto).subscribe(
       data => {
         console.log('O Gasto ' + data.nome + ' foi cadastrada com sucesso!');
@@ -75,6 +80,11 @@ export class FormGastoComponent implements OnInit {
     );
   }
   editarGasto() {
+    
+    if(gasto.categoriaGasto.cod = "null"){
+      gasto.categoriaGasto.cod = null;
+    }
+
     this.apiService.editarGasto(this.gasto).subscribe(
       data => {
         console.log('O Gasto ' + data.nome + ' foi editada com sucesso!');
