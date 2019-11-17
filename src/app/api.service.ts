@@ -5,6 +5,7 @@ import { SignUpInfo } from './auth/sign-up-info';
 import { CategoriaGasto } from './model/categoria-gasto';
 import { Gasto } from './model/gasto';
 import { FonteDeRenda } from './model/fonte-de-renda';
+import { Usuario } from './model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -73,10 +74,23 @@ export class ApiService {
     const url = `${this.apiURL}/gastos/${cod}/pagamento`;
     return this.http.patch<Gasto>(url, { responseType: 'json' });
   }
-
+  //Metodos de Usuário
+  deleteUsuario(cod: any){
+    const url = `${this.apiURL}/usuarios/${cod}`;
+    return this.http.delete<any>(url);
+  }
+  getUsuario() {
+    const url = `${this.apiURL}/usuarios`;
+    return this.http.get<Usuario>(url);
+  }
+  editarUsuario(usuario: Usuario){
+    const url = `${this.apiURL}/usuarios/${usuario.cod}`;
+    return this.http.put<Usuario>(url, usuario);
+    
   //Metodos de Fonte de Renda
   listFontesDeRenda() {
     const url = `${this.apiURL}/fontes-de-renda`;
     return this.http.get<FonteDeRenda>(url, { responseType: 'json' });
+
   }
 }

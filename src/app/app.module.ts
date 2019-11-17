@@ -15,11 +15,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { FormGastoComponent } from './gastos/form-gasto/form-gasto.component';
 import { MenuSuperiorComponent } from './shared/menu-superior/menu-superior.component';
 import { MenuLateralComponent } from './shared/menu-lateral/menu-lateral.component';
+import { CadastroUsuarioComponent } from './usuario/cadastro-usuario/cadastro-usuario.component';
+import { DetalheCadastroComponent } from './usuario/detalhe-cadastro/detalhe-cadastro.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gastos.component';
 import * as _ from 'underscore';
 import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
 import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,8 @@ import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-catego
     FormGastoComponent,
     MenuSuperiorComponent,
     MenuLateralComponent,
+    CadastroUsuarioComponent,
+    DetalheCadastroComponent,
     GraficosGastosComponent,
     CategoriasDeGastoComponent,
     FormCategoriaDeGastoComponent
