@@ -85,7 +85,7 @@ export class FormGastoComponent implements OnInit {
   }
   editarGasto() {
 
-    if (this.gasto.categoriaGasto === null) {
+    if (this.gasto.categoriaGasto.cod === null) {
       this.gasto.categoriaGasto = null;
     }
 
@@ -109,6 +109,9 @@ export class FormGastoComponent implements OnInit {
         this.gasto.vencimento = formatDate(data.vencimento, 'yyyy-MM-dd', 'en-US', '-03:00');
         if (this.gasto.dtPagamento) {
           this.gasto.dtPagamento = formatDate(data.dtPagamento, 'yyyy-MM-dd', 'en-US', '-03:00');
+        }
+        if (data.categoriaGasto === null) {
+          this.gasto.categoriaGasto = new CategoriaGasto();
         }
       },
       error => {
