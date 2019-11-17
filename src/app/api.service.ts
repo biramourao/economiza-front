@@ -11,7 +11,7 @@ import { Usuario } from './model/usuario';
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   apiURL = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
@@ -75,7 +75,7 @@ export class ApiService {
     return this.http.patch<Gasto>(url, { responseType: 'json' });
   }
   //Metodos de Usuário
-  deleteUsuario(cod: any){
+  deleteUsuario(cod: any) {
     const url = `${this.apiURL}/usuarios/${cod}`;
     return this.http.delete<any>(url);
   }
@@ -83,7 +83,7 @@ export class ApiService {
     const url = `${this.apiURL}/usuarios`;
     return this.http.get<Usuario>(url);
   }
-  editarUsuario(usuario: Usuario){
+  editarUsuario(usuario: Usuario) {
     const url = `${this.apiURL}/usuarios/${usuario.cod}`;
     return this.http.put<Usuario>(url, usuario);
   }
@@ -92,27 +92,22 @@ export class ApiService {
   listFontesDeRenda(dtInicio: string, dtFim: string) {
     const params = new HttpParams().set('dtInicio', dtInicio).set('dtFim', dtFim);
     const url = `${this.apiURL}/fontes-de-renda`;
-    return this.http.get<FonteDeRenda>(url, { responseType: 'json' });
+    return this.http.get<FonteDeRenda>(url, { responseType: 'json', params });
   }
-  cadastrarFonteDeRenda(fonteDeRenda: FonteDeRenda){
+  cadastrarFonteDeRenda(fonteDeRenda: FonteDeRenda) {
     const url = `${this.apiURL}/fontes-de-renda`;
     return this.http.post<FonteDeRenda>(url, fonteDeRenda);
   }
-  editarFonteDeRenda(fonteDeRenda: FonteDeRenda){
+  editarFonteDeRenda(fonteDeRenda: FonteDeRenda) {
     const url = `${this.apiURL}/fontes-de-renda/${fonteDeRenda.cod}`;
     return this.http.put<FonteDeRenda>(url, fonteDeRenda);
   }
-  excluirFonteDeRenda(cod: any){
+  excluirFonteDeRenda(cod: any) {
     const url = `${this.apiURL}/fontes-de-renda/${cod}`;
     return this.http.delete<any>(url);
   }
   getFonteDeRenda(cod: any) {
     const url = `${this.apiURL}/fontes-de-renda/${cod}`;
     return this.http.get<FonteDeRenda>(url);
-    return this.http.get<FonteDeRenda>(url, { responseType: 'json', params  });
-  }
-  excluirFonteDeRenda(cod: number) {
-    const url = `${this.apiURL}/fontes-de-renda/${cod}`;
-    return this.http.delete<any>(url);
   }
 }
