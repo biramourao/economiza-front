@@ -1,0 +1,34 @@
+<!--FORMULÁRIO DE CADASTRO-->
+<h2> Cadastro</h2>
+<form method="POST">
+        <!--campo de nome-->
+        <div class="form-group">
+          <label for="nome">Nome: </label>
+          <input type="text" class="form-control" id="nome" placeholder="Escreva seu nome"
+            [(ngModel)]="this.usuario.nome" [ngModelOptions]="{standalone: true}">
+        </div>
+        <!--campo de email-->
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" class="form-control" id="email" placeholder="Escreva seu email"
+          [(ngModel)]="this.usuario.email" [ngModelOptions]="{standalone: true}">
+        </div>
+        <!--Campo de senha-->
+        <div class="form-group">
+          <label for="senha">Senha: </label>
+          <input type="password" class="form-control" id="senha" placeholder="Escreva sua senha"
+          [(ngModel)]="this.usuario.senha" [ngModelOptions]="{standalone: true}">
+        </div>
+        <!--Campo de senha-->
+        <div class="form-group">
+                <label for="confirmSenha">Confirmar Senha: </label>
+                <input type="password" class="form-control" id="confirmSenha" placeholder="Escreva sua senha">
+              </div>
+       
+        <button type="submit" class="btn btn-primary" (click)="cadastrarUsuario()">Cadastrar</button>
+      </form>
+      <p>
+      {{this.usuario.nome}}
+      {{this.usuario.email}}
+      {{this.usuario.senha}}
+    </p>
