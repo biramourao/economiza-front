@@ -11,6 +11,7 @@
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha"
 				[(ngModel)]="usuarioTemp.senha" [ngModelOptions]="{standalone: true}" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<button class="btn btn-lg btn-success btn-block" type="button" [routerLink]="['/cadastro-usuario']">Cadastrar-se</button>
 			<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
 		</form>
 	</div>
