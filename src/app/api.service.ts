@@ -11,7 +11,7 @@ import { Usuario } from './model/usuario';
   providedIn: 'root'
 })
 export class ApiService {
-
+  
   apiURL = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
@@ -87,11 +87,16 @@ export class ApiService {
     const url = `${this.apiURL}/usuarios/${usuario.cod}`;
     return this.http.put<Usuario>(url, usuario);
   }
-  
-  //Metodos de Fonte de Renda
-  listFontesDeRenda() {
-    const url = `${this.apiURL}/fontes-de-renda`;
-    return this.http.get<FonteDeRenda>(url, { responseType: 'json' });
 
+  //Metodos de Fonte de Renda
+  listFontesDeRenda(dtInicio: string, dtFim: string) {
+    const params = new HttpParams().set('dtInicio', dtInicio).set('dtFim', dtFim);
+    const url = `${this.apiURL}/fontes-de-renda`;
+    return this.http.get<FonteDeRenda>(url, { responseType: 'json', params  });
+
+  }
+  excluirFonteDeRenda(cod: number) {
+    const url = `${this.apiURL}/fontes-de-renda/${cod}`;
+    return this.http.delete<any>(url);
   }
 }
