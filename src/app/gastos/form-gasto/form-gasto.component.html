@@ -25,6 +25,8 @@
         <select class="form-control" id="categoriaGasto" value ="{{gasto.categoriaGasto.cod}}"  [(ngModel)]="gasto.categoriaGasto.cod" [ngModelOptions]="{standalone: true}" >
             <option *ngFor="let categoriaGasto of categoriasGasto" value="{{categoriaGasto.cod}}">
                 {{categoriaGasto.descricao}}</option>
+            <option value= "null" selected="selected">
+            SEM CATEGORIA</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary"> Enviar </button>

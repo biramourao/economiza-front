@@ -1,0 +1,42 @@
+<h2>Lista de Categoria de Gasto</h2>
+<div class="row">
+  <div class="col-md-auto">
+    <button type="button" class="btn btn-primary" [routerLink]="['/categorias-de-gasto','cadastrar','']">Novo</button>
+  </div>
+</div>
+<div class="row p-3">
+  <div class="table-responsive">
+    <table class="table table-striped table-sm" id="tbl">
+      <thead>
+        <tr>
+          <th>
+            Categoria de Gasto
+          </th>
+          <th>Editar</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoriaGasto of categoriasGasto">
+          <td>
+            {{categoriaGasto.descricao}}
+          </td>
+          <td>
+            <button type="button" class="btn" [routerLink]="['/categorias-de-gasto','editar', categoriaGasto.cod]">
+              <i class="material-icons">
+                edit
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn" (click)="excluir(categoriaGasto)">
+              <i class="material-icons">
+                delete
+              </i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

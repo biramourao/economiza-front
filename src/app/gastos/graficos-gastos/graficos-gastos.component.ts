@@ -89,7 +89,20 @@ export class GraficosGastosComponent implements OnInit {
 
   groupByCategoria() {
 
-    let gastoPorCategoria = new Array<BarDataChartJs>();
+    const gastoPorCategoria = new Array<BarDataChartJs>();
+
+    const categoriaVazia = new CategoriaGasto();
+    categoriaVazia.cod = 0;
+    categoriaVazia.descricao = 'SEM CATEGORIA';
+    categoriaVazia.usuario = null;
+    this.listaCategoriasGasto.push(categoriaVazia);
+
+    for (let index = 0; index < this.gastos.length; index++) {
+      if (this.gastos[index].categoriaGasto == null) {
+        this.gastos[index].categoriaGasto = categoriaVazia;
+        console.log(this.gastos[index]);
+      }
+    }
 
     for (const categoria of this.listaCategoriasGasto) {
 
@@ -99,17 +112,18 @@ export class GraficosGastosComponent implements OnInit {
       chart.label = categoria.descricao;
 
       for (const gasto of this.gastos) {
-
-        if (gasto.categoriaGasto.cod === categoria.cod) {
-          chart.data[0] += gasto.valor;
-        }
+          if (gasto.categoriaGasto.cod === categoria.cod) {
+            chart.data[0] += gasto.valor;
+          }
       }
-      if(chart.data[0]>0){
+
+      if (chart.data[0] > 0) {
         gastoPorCategoria.push(chart);
       }
     }
+
     let chart = new BarDataChartJs();
-      
+    
     if (gastoPorCategoria.length > 0) {
       gastoPorCategoria[0].data[1] = 0;
       this.barChartData = gastoPorCategoria;
