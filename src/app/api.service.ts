@@ -15,6 +15,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  //Metodos de autenticação
   login(usuario: any) {
     const url = `${this.apiURL}/usuarios/login`;
     return this.http.post<AuthLoginInfo>(url, usuario)
@@ -23,11 +24,13 @@ export class ApiService {
     const url = `${this.apiURL}/usuarios`;
     return this.http.post<SignUpInfo>(url, usuario);
   }
+
+  //Metodos de categoria de Gasto
   listCategoriaDeGasto() {
     const url = `${this.apiURL}/categorias-de-gasto`;
     return this.http.get<CategoriaGasto>(url, { responseType: 'json' });
   }
-  cadastroCategoriaGasto(categoriaGasto: CategoriaGasto) {
+  cadastrarCategoriaGasto(categoriaGasto: CategoriaGasto) {
     const url = `${this.apiURL}/categorias-de-gasto`;
     return this.http.post<CategoriaGasto>(url, categoriaGasto);
   }
@@ -35,6 +38,16 @@ export class ApiService {
     const url = `${this.apiURL}/categorias-de-gasto/${cod}`;
     return this.http.delete<any>(url);
   }
+  getCategoriaGasto(cod: any) {
+    const url = `${this.apiURL}/categorias-de-gasto/${cod}`;
+    return this.http.get<CategoriaGasto>(url);
+  }
+  editarCategoriaGasto(categoriaDeGasto: CategoriaGasto) {
+    const url = `${this.apiURL}/categorias-de-gasto/${categoriaDeGasto.cod}`;
+    return this.http.put<CategoriaGasto>(url, categoriaDeGasto);
+  }
+
+  //Metodos de Gasto
   listGasto(dtInicio: string, dtFim: string) {
     const params = new HttpParams().set('dtInicio', dtInicio).set('dtFim', dtFim);
     const url = `${this.apiURL}/gastos`;
@@ -56,12 +69,14 @@ export class ApiService {
     const url = `${this.apiURL}/gastos/${cod}`;
     return this.http.delete<any>(url);
   }
-  listFontesDeRenda() {
-    const url = `${this.apiURL}/fontes-de-renda`;
-    return this.http.get<FonteDeRenda>(url, { responseType: 'json' });
-  }
   pagarGasto(cod: any) {
     const url = `${this.apiURL}/gastos/${cod}/pagamento`;
     return this.http.patch<Gasto>(url, { responseType: 'json' });
+  }
+
+  //Metodos de Fonte de Renda
+  listFontesDeRenda() {
+    const url = `${this.apiURL}/fontes-de-renda`;
+    return this.http.get<FonteDeRenda>(url, { responseType: 'json' });
   }
 }
