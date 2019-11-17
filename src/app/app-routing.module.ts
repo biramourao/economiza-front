@@ -11,6 +11,7 @@ import { GraficosGastosComponent } from './gastos/graficos-gastos/graficos-gasto
 import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
 import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
 import { FontesDeRendaComponent } from './fontes-de-renda/fontes-de-renda/fontes-de-renda.component';
+import { FormFonteDeRendaComponent } from './fontes-de-renda/form-fonte-de-renda/form-fonte-de-renda.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +41,11 @@ const appRoutes: Routes = [
   {
     path: 'fontes-de-renda',
     component: FontesDeRendaComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'fontes-de-renda/:tipo/:codFonteDeRenda',
+    component: FormFonteDeRendaComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/not-found', canActivate: [AuthGuard] },

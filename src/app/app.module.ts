@@ -23,6 +23,7 @@ import * as _ from 'underscore';
 import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-gasto/categorias-de-gasto.component';
 import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
 import { FontesDeRendaComponent } from './fontes-de-renda/fontes-de-renda/fontes-de-renda.component';
+import { FormFonteDeRendaComponent } from './fontes-de-renda/form-fonte-de-renda/form-fonte-de-renda.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FontesDeRendaComponent } from './fontes-de-renda/fontes-de-renda/fontes
     GraficosGastosComponent,
     CategoriasDeGastoComponent,
     FormCategoriaDeGastoComponent,
-    FontesDeRendaComponent
+    FontesDeRendaComponent,
+    FormFonteDeRendaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<h2>Cadastro de fonte de renda</h2>
+<form method="POST">
+  <!--campo de descrição-->
+  <div class="form-group">
+    <label for="descricao">Descrição: </label>
+    <input type="text" class="form-control" id="descricao" placeholder="Descrição" value="{{this.fonteDeRenda.descricao}}" [(ngModel)]="this.fonteDeRenda.descricao"
+      [ngModelOptions]="{standalone: true}" >
+  </div>
+  <!--campo de valor-->
+  <div class="form-group">
+    <label for="valor">Valor: </label>
+    <input type="number" class="form-control" id="valor" placeholder="Escreva o valor" value="{{this.fonteDeRenda.valor}}" [(ngModel)]="this.fonteDeRenda.valor"
+      [ngModelOptions]="{standalone: true}" >
+  </div>
+  <!--campo de data de vencimento-->
+  <div class="form-group">
+    <label for="dtValidade">Data de vencimento: </label>
+    <input type="date" class="form-control" id="dtValidade" placeholder="Escreva uma data de vencimento" value="{{this.fonteDeRenda.dtValidade}}" [(ngModel)]="this.fonteDeRenda.dtValidade"
+      [ngModelOptions]="{standalone: true}" >
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary" (click)="cadastrarFonteDeRenda()">Cadastrar</button>
+    </div>
+  </div>
+  {{this.fonteDeRenda.descricao}}
+{{this.fonteDeRenda.valor}}
+{{this.fonteDeRenda.dtValidade}}
+</form>
