@@ -17,12 +17,12 @@ export class FormCategoriaDeGastoComponent implements OnInit {
       res => {
         switch (res.tipo) {
           case 'cadastrar': {
-            this.titleForm = 'Cadastrar';
+            this.titleForm = 'Cadastrar categoria de gasto';
             break;
           }
           case 'editar': {
             if (res.codCategoriaGasto) {
-              this.titleForm = 'Editar';
+              this.titleForm = 'Editar categoria de gasto';
               this.getCategoriaGasto(res.codCategoriaGasto);
             } else {
               this.router.navigate(['/not-found']);

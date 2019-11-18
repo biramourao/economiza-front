@@ -19,12 +19,12 @@ export class FormFonteDeRendaComponent implements OnInit {
       res => {
         switch (res.tipo) {
           case 'cadastrar': {
-            this.titleForm = 'Cadastrar';
+            this.titleForm = 'Cadastrar fonte de renda';
             break;
           }
           case 'editar': {
             if (res.codFonteDeRenda) {
-              this.titleForm = 'Editar';
+              this.titleForm = 'Editar fonte de renda';
               this.getFonteDeRenda(res.codFonteDeRenda);
             } else {
               this.router.navigate(['/not-found']);

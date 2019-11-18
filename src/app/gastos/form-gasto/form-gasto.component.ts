@@ -23,12 +23,12 @@ export class FormGastoComponent implements OnInit {
       res => {
         switch (res.tipo) {
           case 'cadastrar': {
-            this.titleForm = 'Cadastrar';
+            this.titleForm = 'Cadastrar gasto';
             break;
           }
           case 'editar': {
             if (res.codGasto) {
-              this.titleForm = 'Editar';
+              this.titleForm = 'Editar gasto';
               this.getGasto(res.codGasto);
             } else {
               this.router.navigate(['/not-found']);
