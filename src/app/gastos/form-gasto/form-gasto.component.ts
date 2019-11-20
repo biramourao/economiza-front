@@ -51,11 +51,11 @@ export class FormGastoComponent implements OnInit {
 
   onSubmit() {
     switch (this.titleForm) {
-      case 'Cadastrar': {
+      case 'Cadastrar gasto': {
         this.cadastrarGasto();
         break;
       }
-      case 'Editar': {
+      case 'Editar gasto': {
         this.editarGasto();
         break;
       }
@@ -73,10 +73,8 @@ export class FormGastoComponent implements OnInit {
     this.apiService.cadastrarGasto(this.gasto).subscribe(
       data => {
         console.log('O Gasto ' + data.nome + ' foi cadastrada com sucesso!');
-        const decisao = confirm('O Gasto ' + data.nome + ' foi cadastrada com sucesso!\n Deseja realizar novo cadastro?');
-        if (!decisao) {
-          this.router.navigate(['/gastos']);
-        }
+        alert('O Gasto ' + data.nome + ' foi cadastrada com sucesso!');
+        this.router.navigate(['/gastos']);
       },
       error => {
         console.log(error);
@@ -92,10 +90,9 @@ export class FormGastoComponent implements OnInit {
     this.apiService.editarGasto(this.gasto).subscribe(
       data => {
         console.log('O Gasto ' + data.nome + ' foi editada com sucesso!');
-        const decisao = confirm('O Gasto ' + data.nome + ' foi editada com sucesso!\n Deseja realizar novo cadastro?');
-        if (!decisao) {
-          this.router.navigate(['/gastos']);
-        }
+        alert('O Gasto ' + data.nome + ' foi editada com sucesso!');
+        this.router.navigate(['/gastos']);
+
       },
       error => {
         console.log(error);

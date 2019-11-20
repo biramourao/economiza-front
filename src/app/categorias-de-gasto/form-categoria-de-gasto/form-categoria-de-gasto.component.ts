@@ -44,11 +44,11 @@ export class FormCategoriaDeGastoComponent implements OnInit {
 
   onSubmit() {
     switch (this.titleForm) {
-      case 'Cadastrar': {
+      case 'Cadastrar categoria de gasto': {
         this.cadastrarCategoriaGasto();
         break;
       }
-      case 'Editar': {
+      case 'Editar categoria de gasto': {
         this.editarCategoriaGasto();
         break;
       }

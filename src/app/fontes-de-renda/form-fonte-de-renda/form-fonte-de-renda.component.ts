@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { FonteDeRenda } from 'src/app/model/fonte-de-renda';
 import { formatDate } from '@angular/common';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-fonte-de-renda',
@@ -11,6 +12,7 @@ import { formatDate } from '@angular/common';
 })
 export class FormFonteDeRendaComponent implements OnInit {
 
+  createForm: FormGroup;
   titleForm: string;
   fonteDeRenda = new FonteDeRenda();
 
@@ -46,11 +48,11 @@ export class FormFonteDeRendaComponent implements OnInit {
 
   onSubmit() {
     switch (this.titleForm) {
-      case 'Cadastrar': {
+      case 'Cadastrar fonte de renda': {
         this.cadastrarFonteDeRenda();
         break;
       }
-      case 'Editar': {
+      case 'Editar fonte de renda': {
         this.editarFonteDeRenda();
         break;
       }
@@ -94,5 +96,12 @@ export class FormFonteDeRendaComponent implements OnInit {
         this.router.navigate(['/fontes-de-renda']);
       }
     );
+  }
+  ativaForm() {
+    if (this.fonteDeRenda.descricao !== '' && this.fonteDeRenda.dtValidade !== '' && this.fonteDeRenda.valor > 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

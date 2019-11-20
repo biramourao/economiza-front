@@ -1,26 +1,38 @@
 <h2>{{this.titleForm}}</h2>
-<form method="POST">
+<form class="was-validated" id="form" name="form" >
   <!--campo de descrição-->
   <div class="form-group">
     <label for="descricao">Descrição: </label>
     <input type="text" class="form-control" id="descricao" placeholder="Descrição" value="{{this.fonteDeRenda.descricao}}" [(ngModel)]="this.fonteDeRenda.descricao"
-      [ngModelOptions]="{standalone: true}" >
+      [ngModelOptions]="{standalone: true}" required>
+       <div class="invalid-feedback">
+          Por favor, digite uma descrição.
+        </div>
   </div>
   <!--campo de valor-->
   <div class="form-group">
     <label for="valor">Valor: </label>
     <input type="number" class="form-control" id="valor" placeholder="Escreva o valor" value="{{this.fonteDeRenda.valor}}" [(ngModel)]="this.fonteDeRenda.valor"
-      [ngModelOptions]="{standalone: true}" >
+      [ngModelOptions]="{standalone: true}" required>
+       <div class="invalid-feedback">
+          Por favor, digite um valor.
+        </div>
   </div>
   <!--campo de data de vencimento-->
   <div class="form-group">
     <label for="dtValidade">Data de vencimento: </label>
     <input type="date" class="form-control" id="dtValidade" placeholder="Escreva uma data de vencimento" value="{{this.fonteDeRenda.dtValidade}}" [(ngModel)]="this.fonteDeRenda.dtValidade"
-      [ngModelOptions]="{standalone: true}" >
+      [ngModelOptions]="{standalone: true}" required>
+       <div class="invalid-feedback">
+          Por favor, escolha a data de vencimento da sua fonte de renda.
+        </div>
   </div>
   <div class="row">
     <div class="col-6">
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar</button>
+      <button type="submit" class="btn btn-primary" value="Enviar" [disabled]="this.ativaForm()" (click)="onSubmit()">Enviar</button>
     </div>
   </div>
 </form>
+<script>
+  
+</script>
