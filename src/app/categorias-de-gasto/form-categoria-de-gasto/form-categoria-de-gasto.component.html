@@ -1,9 +1,9 @@
-<form method="POST" (ngSubmit)="onSubmit()">
+<form method="POST" class="was-validated" (ngSubmit)="onSubmit()">
     <h1>{{titleForm}}</h1>
     <div class="form-group">
         <label for="descricao">Descrição: </label>
         <input type="text" class="form-control" id="descricao" value="{{categoriaDeGasto.descricao}}" placeholder="Descrição"
             [(ngModel)]="categoriaDeGasto.descricao" [ngModelOptions]="{standalone: true}" required autofocus>
     </div>   
-    <button type="submit" class="btn btn-primary"> Enviar </button>
+    <button type="submit" class="btn btn-primary" [disabled]="this.ativaFormCategoriaGasto()"> Enviar </button>
 </form>

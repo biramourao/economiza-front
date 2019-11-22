@@ -1,22 +1,29 @@
 <h2>Detalhes do Usuario</h2>
-<form method="POST">
+<form method="POST" class="was-validated">
   <!--campo de nome-->
-  <div class="form-group">
+  <div class="form-group ">
     <label for="nome">Nome: </label>
     <input type="text" class="form-control" id="nome" placeholder="Escreva seu nome" [(ngModel)]="this.usuario.nome"
       [ngModelOptions]="{standalone: true}" [disabled]="this.naoEditavel">
+    <div class="invalid-feedback">
+      Por favor, digite um nome.
+    </div>
   </div>
   <!--campo de email-->
   <div class="form-group">
     <label for="email">Email: </label>
     <input type="email" class="form-control" id="email" placeholder="Escreva seu email" [(ngModel)]="this.usuario.email"
       [ngModelOptions]="{standalone: true}" [disabled]="this.naoEditavel">
+    <div class="invalid-feedback">
+      Por favor, digite um email válido.
+    </div>
   </div>
   <div class="row">
     <div class="col-6">
       <button type="submit" class="btn btn-primary" (click)="habilitaEdicao()" *ngIf="this.naoEditavel">Editar</button>
-      <button type="submit" class="btn btn-primary" (click)="editarUsuario()" *ngIf="!this.naoEditavel">Salvar</button>
-      <button type="submit" class="btn btn-secondary" (click)="habilitaEdicao()"
+      <button type="submit" class="btn btn-primary" (click)="editarUsuario()" *ngIf="!this.naoEditavel"
+        [disabled]="this.validacao()">Salvar</button>
+      <button type="submit" class="btn btn-secondary" (click)="habilitaEdicao()" (click)="getUsuario()"
         *ngIf="!this.naoEditavel">Cancelar</button>
     </div>
     <div class="col-6 justify-content-right text-right">

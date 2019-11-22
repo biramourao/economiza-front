@@ -22,6 +22,7 @@ export class FormFonteDeRendaComponent implements OnInit {
         switch (res.tipo) {
           case 'cadastrar': {
             this.titleForm = 'Cadastrar fonte de renda';
+            this.fonteDeRenda.descricao = '';
             break;
           }
           case 'editar': {
@@ -98,7 +99,7 @@ export class FormFonteDeRendaComponent implements OnInit {
     );
   }
   ativaForm() {
-    if (this.fonteDeRenda.descricao !== '' && this.fonteDeRenda.dtValidade !== '' && this.fonteDeRenda.valor > 0) {
+    if (this.fonteDeRenda.descricao.search(/([a-zA-Z0-9-])/g) === 0 && this.fonteDeRenda.dtValidade.search(/([0-9][0-9][0-9][0-9])([ \-])(0?[1-9]|1[012])([ \-])(0?[1-9]|[12][0-9]|3[01])/g) === 0 && this.fonteDeRenda.valor > 0) {
       return false;
     } else {
       return true;

@@ -24,11 +24,14 @@ export class FormGastoComponent implements OnInit {
         switch (res.tipo) {
           case 'cadastrar': {
             this.titleForm = 'Cadastrar gasto';
+            this.gasto.nome = '';
+            this.categoriaDeGasto.descricao = '';
             break;
           }
           case 'editar': {
             if (res.codGasto) {
               this.titleForm = 'Editar gasto';
+              this.categoriaDeGasto.descricao = '';
               this.getGasto(res.codGasto);
             } else {
               this.router.navigate(['/not-found']);
@@ -134,6 +137,7 @@ export class FormGastoComponent implements OnInit {
         alert('A Categoria ' + data.descricao + ' foi cadastrada com sucesso!');
         this.listCategoriaGasto();
         this.mostrarCadastroCategoria();
+        $('#CadastroCategoriaDeGastoModal').modal('hide');
       },
       error => {
         console.log(error);
@@ -145,6 +149,21 @@ export class FormGastoComponent implements OnInit {
       this.mostrarCadastroCategoriaDeGasto = false;
     } else {
       this.mostrarCadastroCategoriaDeGasto = true;
+    }
+  }
+  ativaForm() {
+    if (this.gasto.nome.search(/([a-zA-Z0-9-])/g) === 0 && this.gasto.vencimento.search(/([0-9][0-9][0-9][0-9])([ \-])(0?[1-9]|1[012])([ \-])(0?[1-9]|[12][0-9]|3[01])/g) === 0 && this.gasto.categoriaGasto.cod > 0) {
+      return false;
+
+    } else {
+      return true;
+    }
+  }
+  ativaFormCategoriaGasto() {
+    if (this.categoriaDeGasto.descricao.search(/([a-zA-Z0-9-])/g) === 0) {
+      return false;
+    } else {
+      return true;
     }
   }
 

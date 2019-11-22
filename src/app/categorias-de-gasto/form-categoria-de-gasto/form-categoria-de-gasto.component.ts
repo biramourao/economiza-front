@@ -18,6 +18,7 @@ export class FormCategoriaDeGastoComponent implements OnInit {
         switch (res.tipo) {
           case 'cadastrar': {
             this.titleForm = 'Cadastrar categoria de gasto';
+            this.categoriaDeGasto.descricao = '';
             break;
           }
           case 'editar': {
@@ -90,6 +91,13 @@ export class FormCategoriaDeGastoComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  ativaFormCategoriaGasto() {
+    if (this.categoriaDeGasto.descricao.search(/([a-zA-Z0-9-])/g) === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }

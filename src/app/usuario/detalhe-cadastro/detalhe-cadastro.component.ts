@@ -61,8 +61,16 @@ export class DetalheCadastroComponent implements OnInit {
   habilitaEdicao() {
     if (this.naoEditavel) {
       this.naoEditavel = false;
-    }else{
+    } else {
       this.naoEditavel = true;
+    }
+  }
+  validacao() {
+    if (this.usuario.email !== '' && this.usuario.nome !== ''
+      && this.usuario.email.search(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/) === 0) {
+      return false;
+    } else {
+      return true;
     }
   }
 

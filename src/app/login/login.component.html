@@ -2,16 +2,24 @@
 	<div class="col-4">
 	</div>
 	<div class="col-4 align-items-center text-center">
-		<form class="form-signin" method="POST" (ngSubmit)="login()">
+		<form class="form-signin was-validated needs-validation">
 			<h1 class="h3 mb-3 font-weight-normal">Faça login</h1>
 			<label for="inputEmail" class="sr-only">Email</label>
 			<input type="email" id="email" class="form-control" placeholder="Seu email" [(ngModel)]="usuarioTemp.email"
 				[ngModelOptions]="{standalone: true}" required autofocus>
+			<div class="invalid-feedback">
+				Por favor, digite um email válido.
+			</div>
 			<label for="inputPassword" class="sr-only">Senha</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha"
 				[(ngModel)]="usuarioTemp.senha" [ngModelOptions]="{standalone: true}" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-			<button class="btn btn-lg btn-success btn-block" type="button" [routerLink]="['/cadastro-usuario']">Cadastrar-se</button>
+			<div class="invalid-feedback">
+				Por favor, digite sua senha.
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="this.validacao()"
+				(click)="login()">Login</button>
+			<button class="btn btn-lg btn-success btn-block" type="button"
+				[routerLink]="['/cadastro-usuario']">Cadastrar-se</button>
 			<p class="mt-5 mb-3 text-muted">© 2019</p>
 		</form>
 	</div>
