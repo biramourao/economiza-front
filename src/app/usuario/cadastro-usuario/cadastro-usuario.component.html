@@ -7,30 +7,42 @@
     <h2> Cadastro de usuário</h2>
     <form method="POST">
       <!--campo de nome-->
-      <div class="form-group">
+      <div class="form-group was-validated">
         <label for="nome">Nome: </label>
         <input type="text" class="form-control" id="nome" placeholder="Escreva seu nome" [(ngModel)]="this.usuario.nome"
-          [ngModelOptions]="{standalone: true}">
+          [ngModelOptions]="{standalone: true}" required>
+          <div class="invalid-feedback">
+          Por favor, digite o nome.
+        </div>
       </div>
       <!--campo de email-->
-      <div class="form-group">
+      <div class="form-group was-validated">
         <label for="email">Email: </label>
         <input type="email" class="form-control" id="email" placeholder="Escreva seu email"
-          [(ngModel)]="this.usuario.email" [ngModelOptions]="{standalone: true}">
+          [(ngModel)]="this.usuario.email" [ngModelOptions]="{standalone: true}" required>
+          <div class="invalid-feedback">
+          Por favor, digite um email válido.
+        </div>
       </div>
       <!--Campo de senha-->
       <div class="form-group">
         <label for="senha">Senha: </label>
-        <input type="password" class="form-control" id="senha" placeholder="Escreva sua senha"
-          [(ngModel)]="this.usuario.senha" [ngModelOptions]="{standalone: true}">
+        <input type="password" class="form-control {{this.classe}}" id="senha" placeholder="Escreva sua senha"
+          [(ngModel)]="this.usuario.senha" [ngModelOptions]="{standalone: true}" required>
+          <div class="invalid-feedback">
+          As senhas não conferem.
+        </div>
       </div>
       <!--Campo de senha-->
       <div class="form-group">
         <label for="confirmSenha">Confirmar Senha: </label>
-        <input type="password" class="form-control" id="confirmSenha" placeholder="Escreva sua senha">
+        <input type="password" class="form-control {{this.classe}}" id="confirmSenha" placeholder="Repita sua senha"
+          [(ngModel)]="this.confirmSenha" [ngModelOptions]="{standalone: true}" required>
+          <div class="invalid-feedback">
+          As senhas não conferem.
+        </div>
       </div>
-
-      <button type="submit" class="btn btn-primary" (click)="cadastrarUsuario()">Cadastrar</button>
+      <button type="submit" class="btn btn-primary" (click)="cadastrarUsuario()" [disabled]="this.validacao()">Cadastrar</button>
     </form>
   </div>
 </div>

@@ -17,6 +17,9 @@ export class CadastroUsuarioComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
+  confirmSenha = '';
+  mensagemErroSenha = '';
+  classe = 'is-invalid';
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
@@ -36,22 +39,47 @@ export class CadastroUsuarioComponent implements OnInit {
         this.isSignUpFailed = false;
         this.authLoginInfo = new AuthLoginInfo(this.usuario.email, this.usuario.senha);
         this.authService.attemptAuth(this.authLoginInfo).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUsername(data.username);
-        this.tokenStorage.saveAuthorities(data.authorities);
-        window.location.reload();
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        alert(error.msg);
-      });
+          data => {
+            this.tokenStorage.saveToken(data.accessToken);
+            this.tokenStorage.saveUsername(data.username);
+            this.tokenStorage.saveAuthorities(data.authorities);
+            window.location.reload();
+            console.log(data);
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            alert(error.msg);
+          });
       },
       error => {
         this.isSignUpFailed = true;
       }
     );
+  }
+  validacao() {
+    if (this.usuario.email !== '' && this.usuario.nome !== ''
+      && this.usuario.email.search(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/) === 0
+      && this.confirmaSenha()) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  confirmaSenha() {
+    if (this.usuario.senha !== '') {
+      if (this.usuario.senha === this.confirmSenha) {
+        this.classe = 'is-valid';
+        return true;
+      } else {
+        this.mensagemErroSenha = 'As senhas não conferem!'
+        this.classe = 'is-invalid';
+        return false;
+      }
+    } else {
+      this.mensagemErroSenha = 'Digite uma senha!'
+      this.classe = 'is-invalid';
+      return false;
+    }
   }
 }
