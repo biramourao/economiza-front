@@ -17,6 +17,7 @@ fontesDeRenda: FonteDeRenda[];
   reverse = false;
   inicio = '';
   fim = '';
+  sortedData = new Array<FonteDeRenda>();
 
   constructor(private apiService: ApiService, private router: Router, private globalConstantsService : GlobalConstantsService) { }
 
@@ -32,7 +33,11 @@ fontesDeRenda: FonteDeRenda[];
       data => {
         this.fontesDeRenda = data as unknown as FonteDeRenda[];
         this.globalConstantsService.atualizaFontesDeRenda(dtInicio, dtFim);
-        console.log(this.fontesDeRenda);
+        this.sortedData = this.fontesDeRenda.slice();
+        let defSort: Sort = {};
+        defSort.direction = 'asc';
+        defSort.active = 'Validade';
+        this.sortData(defSort);
       },
       error => {
         console.log(error);
@@ -65,4 +70,26 @@ fontesDeRenda: FonteDeRenda[];
     return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US', '-03:00');
   }
 
+//teste
+
+sortData(sort: Sort) {
+    const data = this.fontesDeRenda.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'Validade': return compare(a.dtValidade, b.dtValidade, isAsc);
+        case 'Valor': return compare(a.valor, b.valor, isAsc);
+        case 'Descrição': return compare(a.descricao, b.descricao, isAsc);
+        default: return 0;
+      }
+    });
+  }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

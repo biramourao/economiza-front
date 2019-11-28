@@ -12,29 +12,32 @@
         [(ngModel)]="inicio" [ngModelOptions]="{standalone: true}">
       <input type="date" aria-label="fim" class="form-control" name="fim" id="fim" value="{{fim}}" [(ngModel)]="fim"
         [ngModelOptions]="{standalone: true}">
-      <button type="button" class="btn btn-dark form-control" (click)="atualizaGastos(this.inicio,this.fim)">Filtrar</button>
+      <button type="button" class="btn btn-dark form-control"
+        (click)="atualizaGastos(this.inicio,this.fim)">Filtrar</button>
     </div>
   </div>
   <div class="col-md-auto">
-    <button type="button" class="btn btn-success" [routerLink]="['/relatorio']" [queryParams]="{inicio: this.inicio, fim: this.fim}" >Gerar Graficos</button>
+    <button type="button" class="btn btn-success" [routerLink]="['/relatorio']"
+      [queryParams]="{inicio: this.inicio, fim: this.fim}">Gerar Graficos</button>
   </div>
 </div>
 <div class="row p-3">
-<div class="table-responsive">
-  <table class="table table-striped table-sm" id="tbl">
+  <div class="table-responsive">
+    
+  <table class="table table-striped table-sm" id="tbl" matSort (matSortChange)="sortData($event)" matSortActive="Vencimento" matSortDirection="asc" >
     <thead>
       <tr>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Categoria</th>
-        <th>Vencimento</th>
-        <th>Data Pag.</th>
+        <th mat-sort-header="Descricao" >Descrição</th>
+        <th mat-sort-header="Valor" >Valor</th>
+        <th mat-sort-header="Categoria" >Categoria</th>
+        <th mat-sort-header="Vencimento" >Vencimento</th>
+        <th mat-sort-header="DataPag" >Data Pag.</th>
         <th>Editar</th>
         <th>Excluir</th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let gast of gastos">
+      <ng-container *ngFor="let gast of sortedData">
         <tr>
           <td>{{gast.nome}}</td>
           <td>
@@ -66,7 +69,7 @@
             </button>
           </td>
           <td>
-            <button type="button" class="btn" (click)="excluir(gasto)">
+            <button type="button" class="btn" (click)="excluir(gast)">
               <i class="material-icons">
                 delete
               </i>
@@ -76,33 +79,32 @@
       </ng-container>
     </tbody>
   </table>
-  <!-- Modal -->
-  <div class="modal fade" id="pagamentoModal" tabindex="-1" role="dialog"
-  aria-labelledby="pagamentoModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+    <!-- Modal -->
+    <div class="modal fade" id="pagamentoModal" tabindex="-1" role="dialog" aria-labelledby="pagamentoModal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="pagamentoModal">Efetuar Pagamento</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                  <span aria-hidden="true">&times;</span>
-              </button>
+            <h5 class="modal-title" id="pagamentoModal">Efetuar Pagamento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-              <form class="was-validated">
-                  <div class="input-group">
-                      <input type="date" class="form-control" id="dataPagamento"
-                          value="{{this.gasto.dtPagamento}}" placeholder="dataPagamento"
-                          [(ngModel)]="this.gasto.dtPagamento" [ngModelOptions]="{standalone: true}" required
-                          autofocus>
-                  </div>
-              </form>
+            <form class="was-validated">
+              <div class="input-group">
+                <input type="date" class="form-control" id="dataPagamento" value="{{this.gasto.dtPagamento}}"
+                  placeholder="dataPagamento" [(ngModel)]="this.gasto.dtPagamento" [ngModelOptions]="{standalone: true}"
+                  required autofocus>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary"
-                  (click)="this.pagamento()" [disabled]="this.ativaFormCategoriaGasto()">Pagar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="this.pagamento()"
+              [disabled]="this.ativaFormCategoriaGasto()">Pagar</button>
           </div>
+        </div>
       </div>
+    </div>
   </div>
-</div>
-</div>

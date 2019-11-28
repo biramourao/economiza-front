@@ -18,16 +18,16 @@
 </div>
 <div class="row p-3">
   <div class="table-responsive">
-    <table class="table table-striped table-sm" id="tbl">
+    <table class="table table-striped table-sm" id="tbl" matSort (matSortChange)="sortData($event)" matSortActive="Validade" matSortDirection="asc" >
       <thead>
         <tr>
-          <th>
+          <th mat-sort-header="Descrição">
             Descrição
 		  </th>
-		  <th>
+		  <th mat-sort-header="Valor">
             Valor
 		  </th>
-		  <th>
+		  <th mat-sort-header="Validade">
             Validade
           </th>
           <th>Editar</th>
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let fonteDeRenda of fontesDeRenda">
+        <tr *ngFor="let fonteDeRenda of sortedData">
           <td>
             {{fonteDeRenda.descricao}}
 		  </td>

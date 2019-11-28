@@ -24,6 +24,7 @@ import { CategoriasDeGastoComponent } from './categorias-de-gasto/categorias-de-
 import { FormCategoriaDeGastoComponent } from './categorias-de-gasto/form-categoria-de-gasto/form-categoria-de-gasto.component';
 import { FontesDeRendaComponent } from './fontes-de-renda/fontes-de-renda/fontes-de-renda.component';
 import { FormFonteDeRendaComponent } from './fontes-de-renda/form-fonte-de-renda/form-fonte-de-renda.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { FormFonteDeRendaComponent } from './fontes-de-renda/form-fonte-de-renda
     routing,
     HttpClientModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    MatSortModule
   ],
   providers: [ApiService,
     AuthGuard,

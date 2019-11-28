@@ -31,9 +31,10 @@
                 <option value="0" selected="selected" *ngIf="titleForm =='Editar'">
                     SEM CATEGORIA</option>
             </select>
-            
+
             <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CadastroCategoriaDeGastoModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#CadastroCategoriaDeGastoModal">
                 Cadastrar nova categoria
             </button>
         </div>
@@ -61,11 +62,17 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary"
-                        (click)="this.cadastrarCategoriaGasto()" [disabled]="this.ativaFormCategoriaGasto()">Cadastrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="fecharModal()" (click)="this.cadastrarCategoriaGasto()"
+                        [disabled]="this.ativaFormCategoriaGasto()">Cadastrar</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function fecharModal() {
+            $('#CadastroCategoriaDeGastoModal').modal('hide');
+        }
+        
+    </script>
     <button type="submit" class="btn btn-primary" [disabled]="this.ativaForm()"> Enviar </button>
 </form>

@@ -90,7 +90,7 @@ export class FormFonteDeRendaComponent implements OnInit {
     this.apiService.getFonteDeRenda(cod).subscribe(
       data => {
         this.fonteDeRenda = data;
-        this.fonteDeRenda.dtValidade = formatDate(data.dtValidade, 'yyyy-MM-dd', 'en-US', '-03:00')
+        this.fonteDeRenda.dtValidade = formatDate(data.dtValidade, 'yyyy-MM-dd', 'en-US')
       },
       error => {
         console.log(error);

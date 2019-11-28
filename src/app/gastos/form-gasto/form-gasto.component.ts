@@ -137,7 +137,7 @@ export class FormGastoComponent implements OnInit {
         alert('A Categoria ' + data.descricao + ' foi cadastrada com sucesso!');
         this.listCategoriaGasto();
         this.mostrarCadastroCategoria();
-        $('#CadastroCategoriaDeGastoModal').modal('hide');
+        //$('#CadastroCategoriaDeGastoModal').modal('hide');
       },
       error => {
         console.log(error);

@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
 import * as _ from 'underscore';
 import { CategoriaGasto } from 'src/app/model/categoria-gasto';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-gastos',
@@ -18,12 +19,15 @@ export class GastosComponent implements OnInit {
   fim = this.ultimoDiaMes();
   gastos = new Array<Gasto>();
   gasto = new Gasto();
+  sortedData = new Array<Gasto>();
+  
 
   constructor(private apiService: ApiService, private globalConstants: GlobalConstantsService) {
 
     this.inicio = this.primeiroDiaMes();
     this.fim = this.ultimoDiaMes();
     this.atualizaGastos(this.primeiroDiaMes(), this.ultimoDiaMes());
+    
   }
 
   ngOnInit() {
@@ -38,6 +42,11 @@ export class GastosComponent implements OnInit {
         this.globalConstants.setTotalGastos(this.somaGastos(this.gastos));
         this.globalConstants.gastos = data as unknown as Gasto[];
         this.globalConstants.atualizaFontesDeRenda(dtInicio, dtFim);
+        this.sortedData = this.gastos.slice();
+        let defSort: Sort = {};
+        defSort.direction = 'asc';
+        defSort.active = 'Vencimento';
+        this.sortData(defSort);
       },
       error => {
         console.log(error);
@@ -51,7 +60,7 @@ export class GastosComponent implements OnInit {
     if (resposta) {
       this.apiService.excluirGasto(gasto.cod).subscribe(
         data => {
-          window.location.reload();
+          this.atualizaGastos(this.inicio, this.fim);
         },
         error => {
           console.log(error);
@@ -60,12 +69,11 @@ export class GastosComponent implements OnInit {
     }
   }
 
-  
   cancelarPagamento(cod: number, operacao: string){
     this.apiService.pagarGasto(cod).subscribe(
       data => {
         alert('O Gasto ' + data.nome + ' foi cancelado com sucesso!');
-        window.location.reload();
+        this.atualizaGastos(this.inicio, this.fim);
       },
       error => {
         console.log(error);
@@ -80,7 +88,7 @@ export class GastosComponent implements OnInit {
     this.apiService.editarGasto(this.gasto).subscribe(
       data => {
         alert('O Gasto ' + data.nome + ' foi pago com sucesso!');
-        window.location.reload();
+        this.atualizaGastos(this.inicio, this.fim);
       },
       error => {
         console.log(error);
@@ -131,5 +139,28 @@ export class GastosComponent implements OnInit {
       return true;
     }
   }
+//teste
 
+sortData(sort: Sort) {
+    const data = this.gastos.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'Vencimento': return compare(a.vencimento, b.vencimento, isAsc);
+        case 'Categoria': return compare(a.categoriaGasto.descricao, b.categoriaGasto.descricao, isAsc);
+        case 'Valor': return compare(a.valor, b.valor, isAsc);
+        case 'Descricao': return compare(a.nome, b.nome, isAsc);
+        case 'DataPag': return compare(a.dtPagamento, b.dtPagamento, isAsc);
+        default: return 0;
+      }
+    });
+  }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
