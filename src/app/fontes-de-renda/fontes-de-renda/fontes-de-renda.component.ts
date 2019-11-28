@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-fontes-de-renda',
@@ -34,7 +35,7 @@ fontesDeRenda: FonteDeRenda[];
         this.fontesDeRenda = data as unknown as FonteDeRenda[];
         this.globalConstantsService.atualizaFontesDeRenda(dtInicio, dtFim);
         this.sortedData = this.fontesDeRenda.slice();
-        let defSort: Sort = {};
+        let defSort: Sort = {direction: 'asc', active: 'Validade'};
         defSort.direction = 'asc';
         defSort.active = 'Validade';
         this.sortData(defSort);

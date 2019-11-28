@@ -27,7 +27,7 @@ export class CategoriasDeGastoComponent implements OnInit {
       data => {
         this.categoriasGasto = data as unknown as CategoriaGasto[];
         this.sortedData = this.categoriasGasto.slice();
-        let defSort: Sort = {};
+        let defSort: Sort = {direction: 'asc', active: 'Descricao'};
         defSort.direction = 'asc';
         defSort.active = 'Descricao';
         this.sortData(defSort);

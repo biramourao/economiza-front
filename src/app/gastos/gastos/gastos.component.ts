@@ -43,7 +43,7 @@ export class GastosComponent implements OnInit {
         this.globalConstants.gastos = data as unknown as Gasto[];
         this.globalConstants.atualizaFontesDeRenda(dtInicio, dtFim);
         this.sortedData = this.gastos.slice();
-        let defSort: Sort = {};
+        let defSort: Sort = {direction: 'asc', active: 'Vencimento'};
         defSort.direction = 'asc';
         defSort.active = 'Vencimento';
         this.sortData(defSort);
