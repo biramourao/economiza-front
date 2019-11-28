@@ -4,6 +4,7 @@ import { Gasto } from 'src/app/model/gasto';
 import { formatDate } from '@angular/common';
 import { GlobalConstantsService } from 'src/app/shared/global-constants.service';
 import * as _ from 'underscore';
+import { CategoriaGasto } from 'src/app/model/categoria-gasto';
 
 @Component({
   selector: 'app-gastos',
@@ -16,6 +17,7 @@ export class GastosComponent implements OnInit {
   inicio = this.primeiroDiaMes();
   fim = this.ultimoDiaMes();
   gastos = new Array<Gasto>();
+  gasto = new Gasto();
 
   constructor(private apiService: ApiService, private globalConstants: GlobalConstantsService) {
 
@@ -58,11 +60,44 @@ export class GastosComponent implements OnInit {
     }
   }
 
-  pagamento(cod: any, operacao: string) {
+  
+  cancelarPagamento(cod: number, operacao: string){
     this.apiService.pagarGasto(cod).subscribe(
       data => {
-        alert('O Gasto ' + data.nome + ' foi ' + operacao + ' com sucesso!');
+        alert('O Gasto ' + data.nome + ' foi cancelado com sucesso!');
         window.location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  pagamento() {
+
+    if (this.gasto.categoriaGasto.cod === null) {
+      this.gasto.categoriaGasto = null;
+    }
+    this.apiService.editarGasto(this.gasto).subscribe(
+      data => {
+        alert('O Gasto ' + data.nome + ' foi pago com sucesso!');
+        window.location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  getGasto(cod: any) {
+    this.apiService.getGasto(cod).subscribe(
+      data => {
+        this.gasto = data;
+        this.gasto.vencimento = formatDate(data.vencimento, 'yyyy-MM-dd', 'en-US');
+        if (this.gasto.dtPagamento) {
+          this.gasto.dtPagamento = formatDate(data.dtPagamento, 'yyyy-MM-dd', 'en-US');
+        }
+        if (data.categoriaGasto === null) {
+          this.gasto.categoriaGasto = new CategoriaGasto();
+        }
       },
       error => {
         console.log(error);
@@ -73,13 +108,13 @@ export class GastosComponent implements OnInit {
   ultimoDiaMes(): string {
     const date = new Date();
     const ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    return formatDate(ultimoDia, 'yyyy-MM-dd', 'en-US', '-03:00');
+    return formatDate(ultimoDia, 'yyyy-MM-dd', 'en-US','+0430' );
   }
 
   primeiroDiaMes(): string {
     const date = new Date();
     const primeiroDia = new Date(date.getFullYear(), date.getMonth(), 1);
-    return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US', '-03:00');
+    return formatDate(primeiroDia, 'yyyy-MM-dd', 'en-US','+0430');
   }
 
   somaGastos(gastos: Array<Gasto>): number {
@@ -89,6 +124,12 @@ export class GastosComponent implements OnInit {
     }
     return totalGastos;
   }
-
+  ativaFormCategoriaGasto() {
+    if (this.gasto.dtPagamento.search(/([0-9][0-9][0-9][0-9])([ \-])(0?[1-9]|1[012])([ \-])(0?[1-9]|[12][0-9]|3[01])/g) === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 }

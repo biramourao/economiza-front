@@ -106,9 +106,9 @@ export class FormGastoComponent implements OnInit {
     this.apiService.getGasto(cod).subscribe(
       data => {
         this.gasto = data;
-        this.gasto.vencimento = formatDate(data.vencimento, 'yyyy-MM-dd', 'en-US', '-03:00');
+        this.gasto.vencimento = formatDate(data.vencimento, 'yyyy-MM-dd', 'en-US');
         if (this.gasto.dtPagamento) {
-          this.gasto.dtPagamento = formatDate(data.dtPagamento, 'yyyy-MM-dd', 'en-US', '-03:00');
+          this.gasto.dtPagamento = formatDate(data.dtPagamento, 'yyyy-MM-dd', 'en-US');
         }
         if (data.categoriaGasto === null) {
           this.gasto.categoriaGasto = new CategoriaGasto();

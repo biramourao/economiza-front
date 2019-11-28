@@ -34,32 +34,32 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let gasto of gastos">
+      <ng-container *ngFor="let gast of gastos">
         <tr>
-          <td>{{gasto.nome}}</td>
+          <td>{{gast.nome}}</td>
           <td>
-            {{gasto.valor | currency:'BRL':'symbol':'1.2-2'}}
+            {{gast.valor | currency:'BRL':'symbol':'1.2-2'}}
           </td>
-          <td *ngIf="(gasto.categoriaGasto != null)">
-            {{gasto.categoriaGasto.descricao}}
+          <td *ngIf="(gast.categoriaGasto != null)">
+            {{gast.categoriaGasto.descricao}}
           </td>
-          <td *ngIf="(gasto.categoriaGasto == null)">
+          <td *ngIf="(gast.categoriaGasto == null)">
             SEM CATEGORIA
           </td>
-          <td>{{gasto.vencimento | date: 'dd-MM-yyyy'}}</td>
-          <td *ngIf="gasto.dtPagamento">{{gasto.dtPagamento | date: 'dd-MM-yyyy'}} <br>
-            <button type="button" class="btn" (click)="pagamento(gasto.cod,'estornado')">
+          <td>{{gast.vencimento | date: 'dd-MM-yyyy'}}</td>
+          <td *ngIf="gast.dtPagamento">{{gast.dtPagamento | date: 'dd-MM-yyyy'}} <br>
+            <button type="button" class="btn" (click)="cancelarPagamento(gast.cod)">
               <i class="material-icons">
                 undo
               </i> Cancelar Pag.</button></td>
 
-          <td *ngIf="!gasto.dtPagamento"><button type="button" class="btn" (click)="pagamento(gasto.cod,'pago')">
+          <td *ngIf="!gast.dtPagamento"><button type="button" class="btn" (click)="getGasto(gast.cod)" data-toggle="modal" data-target="#pagamentoModal">
               <i class="material-icons">
                 payment
               </i> Pagar</button>
           </td>
           <td>
-            <button type="button" class="btn" [routerLink]="['/gastos','editar', gasto.cod]">
+            <button type="button" class="btn" [routerLink]="['/gastos','editar', gast.cod]">
               <i class="material-icons">
                 edit
               </i>
@@ -76,4 +76,33 @@
       </ng-container>
     </tbody>
   </table>
+  <!-- Modal -->
+  <div class="modal fade" id="pagamentoModal" tabindex="-1" role="dialog"
+  aria-labelledby="pagamentoModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="pagamentoModal">Efetuar Pagamento</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form class="was-validated">
+                  <div class="input-group">
+                      <input type="date" class="form-control" id="dataPagamento"
+                          value="{{this.gasto.dtPagamento}}" placeholder="dataPagamento"
+                          [(ngModel)]="this.gasto.dtPagamento" [ngModelOptions]="{standalone: true}" required
+                          autofocus>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary"
+                  (click)="this.pagamento()" [disabled]="this.ativaFormCategoriaGasto()">Pagar</button>
+          </div>
+      </div>
+  </div>
+</div>
 </div>
